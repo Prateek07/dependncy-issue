@@ -468,7 +468,7 @@ function Get-TagTargetResourceIds {
         }
     }
 
-    return @($targetIds | Select-Object -Unique)
+    return @($targetIds.ToArray() | Select-Object -Unique)
 }
 
 function Test-RemoveToken {
@@ -565,6 +565,7 @@ function Set-RequestResult {
 
 $functionName = "avd-tag-assignment"
 $auditRows = New-Object System.Collections.Generic.List[object]
+Write-Host "[INIT] Audit collection initialized. Type=$($auditRows.GetType().FullName)"
 
 try {
     Write-Stage -Stage "START" -Message "$functionName started at $((Get-Date).ToUniversalTime().ToString('o'))."
@@ -598,6 +599,8 @@ try {
         $rows = @(Convert-CsvTextToRows -CsvText $csvText)
 
         $requestRows = @($rows | Where-Object { $requestStatuses -contains (Get-RowValue -Row $_ -Column "RequestStatus") })
+        Write-Host "[CSV] Total rows loaded: $($rows.Count)"
+        Write-Host "[REQUEST] Submitted request rows found: $($requestRows.Count)"
         Write-Stage -Stage "CSV" -Message "Loaded $($rows.Count) row(s). Found $($requestRows.Count) submitted request row(s)."
 
         if ($requestRows.Count -eq 0) {
@@ -680,8 +683,8 @@ try {
                     }
                     elseif ($azureChangesApplied) {
                         Set-RowValue -Row $row -Column "LastSeenUtc" -Value ((Get-Date).ToUniversalTime().ToString("o"))
-                        Set-RequestResult -Row $row -Status "Succeeded" -Message (($actions | Select-Object -Unique) -join " ")
-                        $auditRows.Add((New-AuditRow -Action "RequestSucceeded" -VmName $vmName -VmResourceId $vmId -HostPoolName $hostPoolName -Result "Success" -Message ((($actions | Select-Object -Unique) -join " "))))
+                        Set-RequestResult -Row $row -Status "Succeeded" -Message (($actions.ToArray() | Select-Object -Unique) -join " ")
+                        $auditRows.Add((New-AuditRow -Action "RequestSucceeded" -VmName $vmName -VmResourceId $vmId -HostPoolName $hostPoolName -Result "Success" -Message ((($actions.ToArray() | Select-Object -Unique) -join " "))))
                     }
                     else {
                         Set-RequestResult -Row $row -Status "Skipped" -Message "No changes needed. Requested values already match current CSV/live state."
@@ -700,6 +703,7 @@ try {
             }
 
             if ($csvChanged) {
+                Write-Host "[WRITE] Preparing to write $($rows.Count) inventory rows."
                 Set-BlobText -BlobName $inventoryBlob -Text (Convert-RowsToCsvText -Rows $rows) -LeaseId $leaseId
                 Write-Stage -Stage "WRITE" -Message "CSV updated with request processing results."
             }
@@ -712,18 +716,36 @@ try {
         if (-not [string]::IsNullOrWhiteSpace($leaseId)) { Release-BlobLease -BlobName $inventoryBlob -LeaseId $leaseId }
     }
 
-    Append-AuditRows -AuditRows @($auditRows)
+    Write-Host "[AUDIT] Preparing to append $($auditRows.Count) audit row(s)."
+    Append-AuditRows -AuditRows $auditRows.ToArray()
+    Write-Host "[AUDIT] Audit append completed successfully."
     Write-Stage -Stage "END" -Message "$functionName completed. CsvChanged=$csvChanged."
 }
 catch {
-    $errorMessage = $_.Exception.Message
-    Write-Error "$functionName failed. $errorMessage"
+    $errorMessage  = $_.Exception.Message
+    $errorType     = $_.Exception.GetType().FullName
+    $errorLine     = $_.InvocationInfo.ScriptLineNumber
+    $errorPosition = $_.InvocationInfo.PositionMessage
+    $errorStack    = $_.ScriptStackTrace
+
+    Write-Host "============================================================"
+    Write-Host "[ERROR] FunctionName=$functionName"
+    Write-Host "[ERROR] Type=$errorType"
+    Write-Host "[ERROR] Message=$errorMessage"
+    Write-Host "[ERROR] OriginalLine=$errorLine"
+    Write-Host "[ERROR] Position=$errorPosition"
+    Write-Host "[ERROR] StackTrace=$errorStack"
+    Write-Host "[ERROR] AuditRowsCount=$($auditRows.Count)"
+    Write-Host "============================================================"
+
     try {
         $auditRows.Add((New-AuditRow -Action "FunctionFailed" -Result "Failure" -Message $errorMessage))
-        Append-AuditRows -AuditRows @($auditRows)
+        Write-Host "[AUDIT][ERROR] Appending $($auditRows.Count) failure audit row(s)."
+        Append-AuditRows -AuditRows $auditRows.ToArray()
     }
     catch {
         Write-Warning "Failed to write audit row after error. $($_.Exception.Message)"
     }
+
     throw
 }
