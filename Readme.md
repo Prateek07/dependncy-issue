@@ -1,468 +1,830 @@
-Run $ErrorActionPreference = "Stop"
-data.azurerm_virtual_network.vnet["va-avd-snet-prod-2"]: Reading...
-data.azurerm_virtual_network.vnet["va-avd-snet-prod-1"]: Reading...
-module.Keyvault.data.azurerm_client_config.current: Reading...
-module.ComputeGalleryImageVersionData.data.azurerm_shared_image_version.image_version["va_avd_img_ver_prod_1"]: Reading...
-module.ResourceGroup.azurerm_resource_group.rg["va-avd-rg-prod-3"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-logs-usgovva-p01]
-data.azurerm_virtual_network.vnet["va-avd-snet-prod-3"]: Reading...
-module.ResourceGroup.azurerm_resource_group.rg["va-avd-rg-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-osimage-usgovva-p01]
-data.azurerm_client_config.current: Reading...
-module.ResourceGroup.azurerm_resource_group.rg["va-avd-rg-prod-2"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01]
-module.Keyvault.data.azurerm_client_config.current: Read complete after 0s [id=Y2xpZW50Q29uZmlncy9jbGllbnRJZD01ODRkMDE3Mi00MDM0LTQxMjctYWVkMy1iZjcwMmI5NTliMjk7b2JqZWN0SWQ9NDdjYjQ5YzgtNDY0Ni00ZjIxLWEzMGEtOTI1NzdmOWNlNTY4O3N1YnNjcmlwdGlvbklkPTM2OGEyZDgxLWUzZDItNDc3Mi1iMWY2LTBlYmMzOGE2NzEyNTt0ZW5hbnRJZD1j***]
-data.azurerm_client_config.current: Read complete after 0s [id=Y2xpZW50Q29uZmlncy9jbGllbnRJZD01ODRkMDE3Mi00MDM0LTQxMjctYWVkMy1iZjcwMmI5NTliMjk7b2JqZWN0SWQ9NDdjYjQ5YzgtNDY0Ni00ZjIxLWEzMGEtOTI1NzdmOWNlNTY4O3N1YnNjcmlwdGlvbklkPTM2OGEyZDgxLWUzZDItNDc3Mi1iMWY2LTBlYmMzOGE2NzEyNTt0ZW5hbnRJZD1j***]
-module.Keyvault.azurerm_key_vault.Keyvault["va-avd-kv-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.KeyVault/vaults/kv-avd-usgovva-p01]
-data.azurerm_virtual_network.vnet["va-avd-snet-prod-3"]: Read complete after 1s [id=/subscriptions/***/resourceGroups/rg-network-infra-prod/providers/Microsoft.Network/virtualNetworks/vnet-avd-prod-usgovvirginia]
-data.azurerm_virtual_network.vnet["va-avd-snet-prod-1"]: Read complete after 1s [id=/subscriptions/***/resourceGroups/rg-network-infra-prod/providers/Microsoft.Network/virtualNetworks/vnet-avd-prod-usgovvirginia]
-module.ComputeGallery.azurerm_shared_image_gallery.acg["va-avd-acg-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-osimage-usgovva-p01/providers/Microsoft.Compute/galleries/ig_avd_osimage_usgovva_p01]
-data.azurerm_virtual_network.vnet["va-avd-snet-prod-2"]: Read complete after 1s [id=/subscriptions/***/resourceGroups/rg-network-infra-prod/providers/Microsoft.Network/virtualNetworks/vnet-avd-prod-usgovvirginia]
-module.LogAnalyticsWorkspace.azurerm_log_analytics_workspace.LogAnalyticsWorkspace["va-avd-law-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-logs-usgovva-p01/providers/Microsoft.OperationalInsights/workspaces/law-avd-efe-usgovva-p01]
-module.Hostpool.azurerm_virtual_desktop_host_pool.hostpool["va-avd-hp-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01]
-module.ActionGroup.azurerm_monitor_action_group.action_groups["va-avd-actiongroup-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-logs-usgovva-p01/providers/Microsoft.Insights/actionGroups/ag-avd-vm100-usgovva-p01]
-module.Workspace.azurerm_virtual_desktop_workspace.Workspace["va-avd-ws-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/workspaces/wk-avd-vm100-usgovva-p01-pr01]
-module.Subnet.azurerm_subnet.snet["va-avd-snet-prod-2"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-network-infra-prod/providers/Microsoft.Network/virtualNetworks/vnet-avd-prod-usgovvirginia/subnets/snet-avd-osimagebuilder-usgovva-p01]
-module.Subnet.azurerm_subnet.snet["va-avd-snet-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-network-infra-prod/providers/Microsoft.Network/virtualNetworks/vnet-avd-prod-usgovvirginia/subnets/snet-avd-hostpool-usgovva-p01]
-module.Subnet.azurerm_subnet.snet["va-avd-snet-prod-3"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-network-infra-prod/providers/Microsoft.Network/virtualNetworks/vnet-avd-prod-usgovvirginia/subnets/snet-avd-privateendpoints-usgovva-p01]
-module.ComputeGalleryImageVersionData.data.azurerm_shared_image_version.image_version["va_avd_img_ver_prod_1"]: Read complete after 1s [id=/subscriptions/***/resourceGroups/rg-avd-osimage-usgovva-p01/providers/Microsoft.Compute/galleries/ig_avd_osimage_usgovva_p01/images/idf-avd-osimage-w11ss-25h2-usgovva-p01/versions/1.0.0]
-module.ComputeGalleryDefinition.azurerm_shared_image.image_def["va-avd-imagedef-prod-3"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-osimage-usgovva-p01/providers/Microsoft.Compute/galleries/ig_avd_osimage_usgovva_p01/images/idf-avd-win11-25h2-ncast4-usgovva-p01]
-module.ComputeGalleryDefinition.azurerm_shared_image.image_def["va-avd-imagedef-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-osimage-usgovva-p01/providers/Microsoft.Compute/galleries/ig_avd_osimage_usgovva_p01/images/idf-avd-osimage-w11ss-25h2-usgovva-p01]
-module.ComputeGalleryDefinition.azurerm_shared_image.image_def["va-avd-imagedef-prod-2"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-osimage-usgovva-p01/providers/Microsoft.Compute/galleries/ig_avd_osimage_usgovva_p01/images/idf-avd-win11-25h2-nvadsa10-usgovva-p01]
-module.ApplicationGroup.azurerm_virtual_desktop_application_group.applicationGroup["va-avd-ag-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/applicationGroups/app-avd-vm100-usgovva-p01]
-module.ScalingPlan.azapi_resource.scalingPlan["va-avd-sp-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/scalingPlans/scplan-avd-vm100-usgovva-p01]
-module.NetworkSecurityGroup.azurerm_network_security_group.nsg["va-avd-nsg-prod-2"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-network-infra-prod/providers/Microsoft.Network/networkSecurityGroups/nsg-avd-osimagebuilder-usgovva-p01]
-module.NetworkSecurityGroup.azurerm_network_security_group.nsg["va-avd-nsg-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-network-infra-prod/providers/Microsoft.Network/networkSecurityGroups/nsg-avd-hostpool-usgovva-p01]
-module.NetworkSecurityGroup.azurerm_network_security_group.nsg["va-avd-nsg-prod-3"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-network-infra-prod/providers/Microsoft.Network/networkSecurityGroups/nsg-avd-privateendpoints-usgovva-p01]
-module.DiagnosticSetting.azurerm_monitor_diagnostic_setting.DiagnosticSetting["hostpool-va-avd-hp-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01|hstpl-avd-vm100-usgovva-p01-pr01-diag]
-module.DiagnosticSetting.azurerm_monitor_diagnostic_setting.DiagnosticSetting["workspace-va-avd-ws-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/workspaces/wk-avd-vm100-usgovva-p01-pr01|wk-avd-vm100-usgovva-p01-pr01-diag]
-module.ServiceHealthAlert.azurerm_monitor_activity_log_alert.service_health_alerts["va-avd-service-health-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-logs-usgovva-p01/providers/Microsoft.Insights/activityLogAlerts/alert-avd-servicehealth-usgovva-p01]
-data.azurerm_key_vault.session_host["va-avd-sh-prod-3"]: Reading...
-data.azurerm_key_vault.session_host["va-avd-sh-prod-2"]: Reading...
-data.azurerm_key_vault.session_host["va-avd-sh-prod-1"]: Reading...
-module.PrivateEndPoint.azurerm_private_endpoint.pvtEndpoint["va-avd-pe-kv-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Network/privateEndpoints/pe-avd-kv-usgovva-p01-pr01]
-module.PrivateEndPoint.azurerm_private_endpoint.pvtEndpoint["va-avd-pe-hp-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Network/privateEndpoints/pe-avd-hstpl-vm100-usgovva-p01-pr01]
-module.nsgSubnetAssociation.azurerm_subnet_network_security_group_association.nsgSubnetAssociation["va-avd-nsgassoc-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-network-infra-prod/providers/Microsoft.Network/virtualNetworks/vnet-avd-prod-usgovvirginia/subnets/snet-avd-hostpool-usgovva-p01]
-module.nsgSubnetAssociation.azurerm_subnet_network_security_group_association.nsgSubnetAssociation["va-avd-nsgassoc-prod-2"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-network-infra-prod/providers/Microsoft.Network/virtualNetworks/vnet-avd-prod-usgovvirginia/subnets/snet-avd-osimagebuilder-usgovva-p01]
-data.azurerm_key_vault.session_host["va-avd-sh-prod-3"]: Read complete after 0s [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.KeyVault/vaults/kv-avd-usgovva-p01]
-module.nsgSubnetAssociation.azurerm_subnet_network_security_group_association.nsgSubnetAssociation["va-avd-nsgassoc-prod-3"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-network-infra-prod/providers/Microsoft.Network/virtualNetworks/vnet-avd-prod-usgovvirginia/subnets/snet-avd-privateendpoints-usgovva-p01]
-data.azurerm_key_vault.session_host["va-avd-sh-prod-2"]: Read complete after 0s [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.KeyVault/vaults/kv-avd-usgovva-p01]
-data.azurerm_key_vault.session_host["va-avd-sh-prod-1"]: Read complete after 0s [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.KeyVault/vaults/kv-avd-usgovva-p01]
-data.azurerm_key_vault_secret.session_host_domain_join_password["va-avd-sh-prod-2"]: Reading...
-data.azurerm_key_vault_secret.session_host_domain_join_password["va-avd-sh-prod-3"]: Reading...
-data.azurerm_key_vault_secret.session_host_admin_password["va-avd-sh-prod-2"]: Reading...
-data.azurerm_key_vault_secret.session_host_domain_join_password["va-avd-sh-prod-2"]: Read complete after 0s [id=https://kv-avd-usgovva-p01.vault.usgovcloudapi.net/secrets/etn-avd-domainjoin-pass/eade1ba1851e4b3f89814e06d3c20704]
-data.azurerm_key_vault_secret.session_host_domain_join_password["va-avd-sh-prod-1"]: Reading...
-data.azurerm_key_vault_secret.session_host_admin_password["va-avd-sh-prod-3"]: Reading...
-data.azurerm_key_vault_secret.session_host_domain_join_password["va-avd-sh-prod-1"]: Read complete after 0s [id=https://kv-avd-usgovva-p01.vault.usgovcloudapi.net/secrets/etn-avd-domainjoin-pass/eade1ba1851e4b3f89814e06d3c20704]
-data.azurerm_key_vault_secret.session_host_admin_password["va-avd-sh-prod-1"]: Reading...
-data.azurerm_key_vault_secret.session_host_admin_username["va-avd-sh-prod-1"]: Reading...
-data.azurerm_key_vault_secret.session_host_admin_password["va-avd-sh-prod-3"]: Read complete after 0s [id=https://kv-avd-usgovva-p01.vault.usgovcloudapi.net/secrets/etn-avd-sessionhost-pass/a350602145fa44c9afcd749b2707a7db]
-data.azurerm_key_vault_secret.session_host_admin_username["va-avd-sh-prod-3"]: Reading...
-data.azurerm_key_vault_secret.session_host_domain_join_password["va-avd-sh-prod-3"]: Read complete after 0s [id=https://kv-avd-usgovva-p01.vault.usgovcloudapi.net/secrets/etn-avd-domainjoin-pass/eade1ba1851e4b3f89814e06d3c20704]
-data.azurerm_key_vault_secret.session_host_domain_join_username["va-avd-sh-prod-2"]: Reading...
-data.azurerm_key_vault_secret.session_host_admin_password["va-avd-sh-prod-2"]: Read complete after 0s [id=https://kv-avd-usgovva-p01.vault.usgovcloudapi.net/secrets/etn-avd-sessionhost-pass/a350602145fa44c9afcd749b2707a7db]
-data.azurerm_key_vault_secret.session_host_admin_password["va-avd-sh-prod-1"]: Read complete after 0s [id=https://kv-avd-usgovva-p01.vault.usgovcloudapi.net/secrets/etn-avd-sessionhost-pass/a350602145fa44c9afcd749b2707a7db]
-data.azurerm_key_vault_secret.session_host_admin_username["va-avd-sh-prod-2"]: Reading...
-data.azurerm_key_vault_secret.session_host_domain_join_username["va-avd-sh-prod-3"]: Reading...
-data.azurerm_key_vault_secret.session_host_admin_username["va-avd-sh-prod-1"]: Read complete after 0s [id=https://kv-avd-usgovva-p01.vault.usgovcloudapi.net/secrets/etn-avd-sessionhost-uname/7988f5a930284a0db1e975a8a3be7ee5]
-data.azurerm_key_vault_secret.session_host_domain_join_username["va-avd-sh-prod-1"]: Reading...
-data.azurerm_key_vault_secret.session_host_admin_username["va-avd-sh-prod-2"]: Read complete after 0s [id=https://kv-avd-usgovva-p01.vault.usgovcloudapi.net/secrets/etn-avd-sessionhost-uname/7988f5a930284a0db1e975a8a3be7ee5]
-data.azurerm_key_vault_secret.session_host_domain_join_username["va-avd-sh-prod-3"]: Read complete after 0s [id=https://kv-avd-usgovva-p01.vault.usgovcloudapi.net/secrets/etn-avd-domainjoin-uname/6a756da6c15b40f28840ecd6f6d806cd]
-data.azurerm_key_vault_secret.session_host_domain_join_username["va-avd-sh-prod-2"]: Read complete after 0s [id=https://kv-avd-usgovva-p01.vault.usgovcloudapi.net/secrets/etn-avd-domainjoin-uname/6a756da6c15b40f28840ecd6f6d806cd]
-data.azurerm_key_vault_secret.session_host_domain_join_username["va-avd-sh-prod-1"]: Read complete after 0s [id=https://kv-avd-usgovva-p01.vault.usgovcloudapi.net/secrets/etn-avd-domainjoin-uname/6a756da6c15b40f28840ecd6f6d806cd]
-data.azurerm_key_vault_secret.session_host_admin_username["va-avd-sh-prod-3"]: Read complete after 0s [id=https://kv-avd-usgovva-p01.vault.usgovcloudapi.net/secrets/etn-avd-sessionhost-uname/7988f5a930284a0db1e975a8a3be7ee5]
-module.NetworkInterface.azurerm_network_interface.nic["va-avd-sh-prod-1-2"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Network/networkInterfaces/EWAPV10001-2-nic]
-module.NetworkInterface.azurerm_network_interface.nic["va-avd-sh-prod-2-11"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Network/networkInterfaces/EWAPV10001-11-nic]
-module.NetworkInterface.azurerm_network_interface.nic["va-avd-sh-prod-2-4"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Network/networkInterfaces/EWAPV10001-4-nic]
-module.NetworkInterface.azurerm_network_interface.nic["va-avd-sh-prod-1-3"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Network/networkInterfaces/EWAPV10001-3-nic]
-module.NetworkInterface.azurerm_network_interface.nic["va-avd-sh-prod-1-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Network/networkInterfaces/EWAPV10001-1-nic]
-module.NetworkInterface.azurerm_network_interface.nic["va-avd-sh-prod-2-5"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Network/networkInterfaces/EWAPV10001-5-nic]
-module.NetworkInterface.azurerm_network_interface.nic["va-avd-sh-prod-2-13"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Network/networkInterfaces/EWAPV10001-13-nic]
-module.NetworkInterface.azurerm_network_interface.nic["va-avd-sh-prod-2-18"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Network/networkInterfaces/EWAPV10001-18-nic]
-module.SessionHost.azurerm_virtual_desktop_host_pool_registration_info.rg_token["va-avd-hp-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/registrationInfo/default]
-module.SessionHost.azurerm_windows_virtual_machine.avd_vm["va-avd-sh-prod-1-3"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-3]
-module.SessionHost.azurerm_windows_virtual_machine.avd_vm["va-avd-sh-prod-1-2"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-2]
-module.SessionHost.azurerm_windows_virtual_machine.avd_vm["va-avd-sh-prod-2-5"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-5]
-module.SessionHost.azurerm_windows_virtual_machine.avd_vm["va-avd-sh-prod-1-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-1]
-module.SessionHost.azurerm_windows_virtual_machine.avd_vm["va-avd-sh-prod-2-18"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-18]
-module.SessionHost.azurerm_windows_virtual_machine.avd_vm["va-avd-sh-prod-2-4"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-4]
-module.SessionHost.azurerm_windows_virtual_machine.avd_vm["va-avd-sh-prod-2-11"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-11]
-module.SessionHost.azurerm_windows_virtual_machine.avd_vm["va-avd-sh-prod-2-13"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-13]
-module.ScalingPlan.azapi_resource.personalSchedule["va-avd-sp-prod-1-Weekdays"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/scalingPlans/scplan-avd-vm100-usgovva-p01/personalSchedules/Weekdays]
-module.SessionHost.azurerm_virtual_machine_extension.extend_os_disk["va-avd-sh-prod-2-18"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-18/extensions/EWAPV10001-18-extend-c-drive]
-module.SessionHost.azurerm_virtual_machine_extension.extend_os_disk["va-avd-sh-prod-2-4"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-4/extensions/EWAPV10001-4-extend-c-drive]
-module.SessionHost.azurerm_virtual_machine_extension.extend_os_disk["va-avd-sh-prod-1-2"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-2/extensions/EWAPV10001-2-extend-c-drive]
-module.SessionHost.azurerm_virtual_machine_extension.extend_os_disk["va-avd-sh-prod-2-11"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-11/extensions/EWAPV10001-11-extend-c-drive]
-module.SessionHost.azurerm_virtual_machine_extension.extend_os_disk["va-avd-sh-prod-1-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-1/extensions/EWAPV10001-1-extend-c-drive]
-module.SessionHost.azurerm_virtual_machine_extension.extend_os_disk["va-avd-sh-prod-2-13"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-13/extensions/EWAPV10001-13-extend-c-drive]
-module.SessionHost.azurerm_virtual_machine_extension.extend_os_disk["va-avd-sh-prod-2-5"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-5/extensions/EWAPV10001-5-extend-c-drive]
-module.SessionHost.azurerm_virtual_machine_extension.extend_os_disk["va-avd-sh-prod-1-3"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-3/extensions/EWAPV10001-3-extend-c-drive]
-module.SessionHost.azurerm_virtual_machine_extension.domain_join["va-avd-sh-prod-1-2"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-2/extensions/EWAPV10001-2-domainjoin]
-module.SessionHost.azurerm_virtual_machine_extension.domain_join["va-avd-sh-prod-1-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-1/extensions/EWAPV10001-1-domainjoin]
-module.SessionHost.azurerm_virtual_machine_extension.domain_join["va-avd-sh-prod-2-4"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-4/extensions/EWAPV10001-4-domainjoin]
-module.SessionHost.azurerm_virtual_machine_extension.domain_join["va-avd-sh-prod-2-18"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-18/extensions/EWAPV10001-18-domainjoin]
-module.SessionHost.azurerm_virtual_machine_extension.domain_join["va-avd-sh-prod-2-11"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-11/extensions/EWAPV10001-11-domainjoin]
-module.SessionHost.azurerm_virtual_machine_extension.domain_join["va-avd-sh-prod-1-3"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-3/extensions/EWAPV10001-3-domainjoin]
-module.SessionHost.azurerm_virtual_machine_extension.domain_join["va-avd-sh-prod-2-13"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-13/extensions/EWAPV10001-13-domainjoin]
-module.SessionHost.azurerm_virtual_machine_extension.domain_join["va-avd-sh-prod-2-5"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-5/extensions/EWAPV10001-5-domainjoin]
-module.SessionHost.azurerm_virtual_machine_extension.vmext_dsc["va-avd-sh-prod-2-11"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-11/extensions/EWAPV10001-11-avd-dsc]
-module.SessionHost.azurerm_virtual_machine_extension.vmext_dsc["va-avd-sh-prod-2-5"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-5/extensions/EWAPV10001-5-avd-dsc]
-module.SessionHost.azurerm_virtual_machine_extension.vmext_dsc["va-avd-sh-prod-1-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-1/extensions/EWAPV10001-1-avd-dsc]
-module.SessionHost.azurerm_virtual_machine_extension.vmext_dsc["va-avd-sh-prod-2-13"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-13/extensions/EWAPV10001-13-avd-dsc]
-module.SessionHost.azurerm_virtual_machine_extension.vmext_dsc["va-avd-sh-prod-2-18"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-18/extensions/EWAPV10001-18-avd-dsc]
-module.SessionHost.azurerm_virtual_machine_extension.vmext_dsc["va-avd-sh-prod-1-3"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-3/extensions/EWAPV10001-3-avd-dsc]
-module.SessionHost.azurerm_virtual_machine_extension.vmext_dsc["va-avd-sh-prod-1-2"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-2/extensions/EWAPV10001-2-avd-dsc]
-module.SessionHost.azurerm_virtual_machine_extension.vmext_dsc["va-avd-sh-prod-2-4"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-4/extensions/EWAPV10001-4-avd-dsc]
-module.SessionHostUnregister.azapi_resource_action.remove_session_host_from_hostpool["va-avd-sh-prod-1-2"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-2.FED.etnfederal.com]
-module.SessionHostUnregister.azapi_resource_action.remove_session_host_from_hostpool["va-avd-sh-prod-2-11"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-11.FED.etnfederal.com]
-module.SessionHostUnregister.azapi_resource_action.remove_session_host_from_hostpool["va-avd-sh-prod-2-18"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-18.FED.etnfederal.com]
-module.SessionHostUnregister.azapi_resource_action.remove_session_host_from_hostpool["va-avd-sh-prod-1-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-1.FED.etnfederal.com]
-module.SessionHostUnregister.azapi_resource_action.remove_session_host_from_hostpool["va-avd-sh-prod-2-13"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-13.FED.etnfederal.com]
-module.SessionHostUnregister.azapi_resource_action.remove_session_host_from_hostpool["va-avd-sh-prod-1-3"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-3.FED.etnfederal.com]
-module.AzureMonitorAgent.azurerm_virtual_machine_extension.ama["va-avd-sh-prod-1-2"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-2/extensions/va-avd-sh-prod-1-2-ama]
-module.AzureMonitorAgent.azurerm_virtual_machine_extension.ama["va-avd-sh-prod-2-18"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-18/extensions/va-avd-sh-prod-2-18-ama]
-module.SessionHostUnregister.azapi_resource_action.remove_session_host_from_hostpool["va-avd-sh-prod-2-5"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-5.FED.etnfederal.com]
-module.SessionHostUnregister.azapi_resource_action.remove_session_host_from_hostpool["va-avd-sh-prod-2-4"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-4.FED.etnfederal.com]
-module.AzureMonitorAgent.azurerm_virtual_machine_extension.ama["va-avd-sh-prod-2-13"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-13/extensions/va-avd-sh-prod-2-13-ama]
-module.AzureMonitorAgent.azurerm_virtual_machine_extension.ama["va-avd-sh-prod-2-4"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-4/extensions/va-avd-sh-prod-2-4-ama]
-module.AzureMonitorAgent.azurerm_virtual_machine_extension.ama["va-avd-sh-prod-1-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-1/extensions/va-avd-sh-prod-1-1-ama]
-module.AzureMonitorAgent.azurerm_virtual_machine_extension.ama["va-avd-sh-prod-1-3"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-3/extensions/va-avd-sh-prod-1-3-ama]
-module.AzureMonitorAgent.azurerm_virtual_machine_extension.ama["va-avd-sh-prod-2-5"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-5/extensions/va-avd-sh-prod-2-5-ama]
-module.AzureMonitorAgent.azurerm_virtual_machine_extension.ama["va-avd-sh-prod-2-11"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-11/extensions/va-avd-sh-prod-2-11-ama]
-module.AzureMonitorAgent.time_sleep.wait_for_vm_after_start["va-avd-sh-prod-1-2"]: Refreshing state... [id=2026-04-01T09:47:27Z]
-module.AzureMonitorAgent.time_sleep.wait_for_vm_after_start["va-avd-sh-prod-2-13"]: Refreshing state... [id=2026-04-07T09:14:24Z]
-module.AzureMonitorAgent.time_sleep.wait_for_vm_after_start["va-avd-sh-prod-2-5"]: Refreshing state... [id=2026-06-04T09:17:15Z]
-module.AzureMonitorAgent.time_sleep.wait_for_vm_after_start["va-avd-sh-prod-2-11"]: Refreshing state... [id=2026-04-01T17:19:09Z]
-module.AzureMonitorAgent.time_sleep.wait_for_vm_after_start["va-avd-sh-prod-2-18"]: Refreshing state... [id=2026-04-07T09:14:24Z]
-module.AzureMonitorAgent.time_sleep.wait_for_vm_after_start["va-avd-sh-prod-1-3"]: Refreshing state... [id=2026-04-01T09:47:27Z]
-module.AzureMonitorAgent.time_sleep.wait_for_vm_after_start["va-avd-sh-prod-1-1"]: Refreshing state... [id=2026-04-01T09:47:27Z]
-module.AzureMonitorAgent.time_sleep.wait_for_vm_after_start["va-avd-sh-prod-2-4"]: Refreshing state... [id=2026-04-01T17:19:09Z]
-module.AzureMonitorAgent.azapi_resource_action.start_vm_before_ama_destroy["va-avd-sh-prod-2-13"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-13/start]
-module.AzureMonitorAgent.azapi_resource_action.start_vm_before_ama_destroy["va-avd-sh-prod-2-5"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-5/start]
-module.AzureMonitorAgent.azapi_resource_action.start_vm_before_ama_destroy["va-avd-sh-prod-2-4"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-4/start]
-module.AzureMonitorAgent.azapi_resource_action.start_vm_before_ama_destroy["va-avd-sh-prod-1-3"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-3/start]
-module.AzureMonitorAgent.azapi_resource_action.start_vm_before_ama_destroy["va-avd-sh-prod-1-2"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-2/start]
-module.AzureMonitorAgent.azapi_resource_action.start_vm_before_ama_destroy["va-avd-sh-prod-2-18"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-18/start]
-module.AzureMonitorAgent.azapi_resource_action.start_vm_before_ama_destroy["va-avd-sh-prod-1-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-1/start]
-module.AzureMonitorAgent.azapi_resource_action.start_vm_before_ama_destroy["va-avd-sh-prod-2-11"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-11/start]
-module.DCE.azurerm_monitor_data_collection_endpoint.dce["va-avd-dce-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-logs-usgovva-p01/providers/Microsoft.Insights/dataCollectionEndpoints/dce-avd-vm100-usgovva-p01]
-module.DCR.azurerm_monitor_data_collection_rule.dcr["va-avd-dcr-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-logs-usgovva-p01/providers/Microsoft.Insights/dataCollectionRules/dcr-avd-vm100-usgovva-p01]
-module.DCEAssociation.azurerm_monitor_data_collection_rule_association.dce_association["va-avd-dce-prod-1-va-avd-sh-prod-2-4"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-4/providers/Microsoft.Insights/dataCollectionRuleAssociations/configurationAccessEndpoint]
-module.DCEAssociation.azurerm_monitor_data_collection_rule_association.dce_association["va-avd-dce-prod-1-va-avd-sh-prod-1-2"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-2/providers/Microsoft.Insights/dataCollectionRuleAssociations/configurationAccessEndpoint]
-module.DCEAssociation.azurerm_monitor_data_collection_rule_association.dce_association["va-avd-dce-prod-1-va-avd-sh-prod-2-11"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-11/providers/Microsoft.Insights/dataCollectionRuleAssociations/configurationAccessEndpoint]
-module.DCEAssociation.azurerm_monitor_data_collection_rule_association.dce_association["va-avd-dce-prod-1-va-avd-sh-prod-2-18"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-18/providers/Microsoft.Insights/dataCollectionRuleAssociations/configurationAccessEndpoint]
-module.DCEAssociation.azurerm_monitor_data_collection_rule_association.dce_association["va-avd-dce-prod-1-va-avd-sh-prod-1-3"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-3/providers/Microsoft.Insights/dataCollectionRuleAssociations/configurationAccessEndpoint]
-module.DCEAssociation.azurerm_monitor_data_collection_rule_association.dce_association["va-avd-dce-prod-1-va-avd-sh-prod-2-13"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-13/providers/Microsoft.Insights/dataCollectionRuleAssociations/configurationAccessEndpoint]
-module.DCEAssociation.azurerm_monitor_data_collection_rule_association.dce_association["va-avd-dce-prod-1-va-avd-sh-prod-1-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-1/providers/Microsoft.Insights/dataCollectionRuleAssociations/configurationAccessEndpoint]
-module.DCEAssociation.azurerm_monitor_data_collection_rule_association.dce_association["va-avd-dce-prod-1-va-avd-sh-prod-2-5"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-5/providers/Microsoft.Insights/dataCollectionRuleAssociations/configurationAccessEndpoint]
-module.DCRAssociation.azurerm_monitor_data_collection_rule_association.dcr_association["va-avd-dcr-prod-1-va-avd-sh-prod-2-11"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-11/providers/Microsoft.Insights/dataCollectionRuleAssociations/dcr-EWAPV10001-11-assoc]
-module.DCRAssociation.azurerm_monitor_data_collection_rule_association.dcr_association["va-avd-dcr-prod-1-va-avd-sh-prod-2-18"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-18/providers/Microsoft.Insights/dataCollectionRuleAssociations/dcr-EWAPV10001-18-assoc]
-module.DCRAssociation.azurerm_monitor_data_collection_rule_association.dcr_association["va-avd-dcr-prod-1-va-avd-sh-prod-1-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-1/providers/Microsoft.Insights/dataCollectionRuleAssociations/dcr-EWAPV10001-1-assoc]
-module.DCRAssociation.azurerm_monitor_data_collection_rule_association.dcr_association["va-avd-dcr-prod-1-va-avd-sh-prod-1-2"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-2/providers/Microsoft.Insights/dataCollectionRuleAssociations/dcr-EWAPV10001-2-assoc]
-module.DCRAssociation.azurerm_monitor_data_collection_rule_association.dcr_association["va-avd-dcr-prod-1-va-avd-sh-prod-2-13"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-13/providers/Microsoft.Insights/dataCollectionRuleAssociations/dcr-EWAPV10001-13-assoc]
-module.DCRAssociation.azurerm_monitor_data_collection_rule_association.dcr_association["va-avd-dcr-prod-1-va-avd-sh-prod-1-3"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-3/providers/Microsoft.Insights/dataCollectionRuleAssociations/dcr-EWAPV10001-3-assoc]
-module.DCRAssociation.azurerm_monitor_data_collection_rule_association.dcr_association["va-avd-dcr-prod-1-va-avd-sh-prod-2-4"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-4/providers/Microsoft.Insights/dataCollectionRuleAssociations/dcr-EWAPV10001-4-assoc]
-module.DCRAssociation.azurerm_monitor_data_collection_rule_association.dcr_association["va-avd-dcr-prod-1-va-avd-sh-prod-2-5"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.Compute/virtualMachines/EWAPV10001-5/providers/Microsoft.Insights/dataCollectionRuleAssociations/dcr-EWAPV10001-5-assoc]
-module.Alerts.azurerm_monitor_scheduled_query_rules_alert_v2.alerts["va-avd-alert-diskfree-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-logs-usgovva-p01/providers/Microsoft.Insights/scheduledQueryRules/alert-avd-diskfree-usgovva-p01]
-module.Alerts.azurerm_monitor_scheduled_query_rules_alert_v2.alerts["va-avd-alert-cpu-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-logs-usgovva-p01/providers/Microsoft.Insights/scheduledQueryRules/alert-avd-cpu-usgovva-p01]
-module.Alerts.azurerm_monitor_scheduled_query_rules_alert_v2.alerts["va-avd-alert-memory-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-logs-usgovva-p01/providers/Microsoft.Insights/scheduledQueryRules/alert-avd-memory-usgovva-p01]
-module.Alerts.azurerm_monitor_scheduled_query_rules_alert_v2.alerts["va-avd-alert-disklatency-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-logs-usgovva-p01/providers/Microsoft.Insights/scheduledQueryRules/alert-avd-disklatency-usgovva-p01]
-module.Alerts.azurerm_monitor_scheduled_query_rules_alert_v2.alerts["va-avd-alert-network-prod-1"]: Refreshing state... [id=/subscriptions/***/resourceGroups/rg-avd-logs-usgovva-p01/providers/Microsoft.Insights/scheduledQueryRules/alert-avd-network-usgovva-p01]
+param($Timer)
 
-Terraform used the selected providers to generate the following execution
-plan. Resource actions are indicated with the following symbols:
-  + create
-  ~ update in-place
--/+ destroy and then create replacement
- <= read (data resources)
+$ErrorActionPreference = "Stop"
+$ProgressPreference = "SilentlyContinue"
 
-Terraform planned the following actions, but then encountered a problem:
+# ============================================================================
+# Function: avd-inventory-capture
+# Runtime : Azure Functions PowerShell
+# Purpose : Keep avd-vm-master.csv aligned with live AVD session host VMs.
+# Cloud   : Azure Government / GCC High ready
+#
+# IMPORTANT:
+# This script uses the exact CSV schema provided by the user:
+# VmName, VmResourceId, ResourceGroup, HostPoolName, HostPoolResourceGroup,
+# SessionHostName, PrivateIpAddress, AssignedUser, CostCenter, VmSize, NicName,
+# OsDiskName, DataDiskNames, Status, LastSeenUtc, NewAssignedUser,
+# az_res_costcenter, RequestStatus, RequestMessage
+#
+# Change-aware behavior:
+# - The CSV is written only when a new AVD session host VM is found, an existing
+#   AVD session host VM changes, or a deleted/non-AVD row must be removed.
+# - LastSeenUtc is not refreshed on every timer run. This prevents unnecessary
+#   blob writes when nothing changed.
+# - User/admin request columns are preserved by inventory reconciliation.
+# ============================================================================
 
-  # module.DiagnosticSetting.data.azurerm_monitor_diagnostic_categories.Diagnostic["hostpool-va-avd-hp-prod-1"] will be read during apply
-  # (config refers to values not yet known)
- <= data "azurerm_monitor_diagnostic_categories" "Diagnostic" {
-      + id                  = (known after apply)
-      + log_category_groups = (known after apply)
-      + log_category_types  = (known after apply)
-      + metrics             = (known after apply)
-      + resource_id         = (known after apply)
+$CsvColumns = @(
+    "VmName",
+    "VmResourceId",
+    "ResourceGroup",
+    "HostPoolName",
+    "HostPoolResourceGroup",
+    "SessionHostName",
+    "PrivateIpAddress",
+    "AssignedUser",
+    "CostCenter",
+    "VmSize",
+    "NicName",
+    "OsDiskName",
+    "DataDiskNames",
+    "Status",
+    "LastSeenUtc",
+    "NewAssignedUser",
+    "az_res_costcenter",
+    "RequestStatus",
+    "RequestMessage"
+)
+
+$CurrentStateColumns = @(
+    "VmName",
+    "VmResourceId",
+    "ResourceGroup",
+    "HostPoolName",
+    "HostPoolResourceGroup",
+    "SessionHostName",
+    "PrivateIpAddress",
+    "AssignedUser",
+    "CostCenter",
+    "VmSize",
+    "NicName",
+    "OsDiskName",
+    "DataDiskNames",
+    "Status"
+)
+
+$UserRequestColumns = @(
+    "NewAssignedUser",
+    "az_res_costcenter",
+    "RequestStatus",
+    "RequestMessage"
+)
+
+$AuditColumns = @(
+    "AuditTimeUtc",
+    "FunctionName",
+    "Action",
+    "VmName",
+    "VmResourceId",
+    "HostPoolName",
+    "Result",
+    "Message"
+)
+
+function Write-Stage {
+    param(
+        [Parameter(Mandatory)][string]$Stage,
+        [Parameter(Mandatory)][string]$Message
+    )
+    Write-Host "[$Stage] $Message"
+}
+
+function Get-StringValue {
+    param([AllowNull()][object]$Value)
+    if ($null -eq $Value) { return "" }
+    return ([string]$Value).Trim()
+}
+
+function Get-RequiredSetting {
+    param([Parameter(Mandatory)][string]$Name)
+    $value = [Environment]::GetEnvironmentVariable($Name)
+    if ([string]::IsNullOrWhiteSpace($value)) {
+        throw "Required Function App setting '$Name' is missing or empty."
+    }
+    return $value.Trim()
+}
+
+function Get-OptionalSetting {
+    param(
+        [Parameter(Mandatory)][string]$Name,
+        [string]$DefaultValue = ""
+    )
+    $value = [Environment]::GetEnvironmentVariable($Name)
+    if ([string]::IsNullOrWhiteSpace($value)) { return $DefaultValue }
+    return $value.Trim()
+}
+
+function Get-SettingList {
+    param([Parameter(Mandatory)][string]$Name)
+    $raw = Get-OptionalSetting -Name $Name
+    if ([string]::IsNullOrWhiteSpace($raw)) { return @() }
+    return @($raw -split "," | ForEach-Object { $_.Trim() } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+}
+
+function ConvertFrom-SecureToken {
+    param([AllowNull()][object]$Token)
+    if ($null -eq $Token) { return "" }
+    if ($Token -is [securestring]) {
+        $ptr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($Token)
+        try { return [Runtime.InteropServices.Marshal]::PtrToStringBSTR($ptr) }
+        finally { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($ptr) }
+    }
+    return [string]$Token
+}
+
+function Get-BlobEndpointSuffix {
+    $azureEnvironment = Get-OptionalSetting -Name "AZURE_ENVIRONMENT" -DefaultValue "AzureUSGovernment"
+    if ($azureEnvironment -ne "AzureUSGovernment") {
+        throw "Unsupported AZURE_ENVIRONMENT '$azureEnvironment'. This function package is configured for GCC High / AzureUSGovernment only."
     }
 
-  # module.DiagnosticSetting.data.azurerm_monitor_diagnostic_categories.Diagnostic["hostpool-va-avd-hp-prod-2"] will be read during apply
-  # (config refers to values not yet known)
- <= data "azurerm_monitor_diagnostic_categories" "Diagnostic" {
-      + id                  = (known after apply)
-      + log_category_groups = (known after apply)
-      + log_category_types  = (known after apply)
-      + metrics             = (known after apply)
-      + resource_id         = (known after apply)
+    return "blob.core.usgovcloudapi.net"
+}
+
+function Get-StorageBearerToken {
+    # GCC High / Azure Government: do not hard-code the commercial storage audience.
+    # Get-AzAccessToken -ResourceTypeName Storage resolves the Storage token resource from the current Az environment.
+    # The current Az environment is set during Connect-AzAccount using AZURE_ENVIRONMENT = AzureUSGovernment.
+    $resourceTypeName = Get-OptionalSetting -Name "STORAGE_TOKEN_RESOURCE_TYPE_NAME" -DefaultValue "Storage"
+
+    try {
+        $context = Get-AzContext -ErrorAction SilentlyContinue
+        $environmentName = if ($context -and $context.Environment -and $context.Environment.Name) { $context.Environment.Name } else { "unknown" }
+        Write-Host "Requesting Azure Storage bearer token using ResourceTypeName='$resourceTypeName' for Az environment='$environmentName'."
+
+        $tokenResult = Get-AzAccessToken -ResourceTypeName $resourceTypeName -ErrorAction Stop
+        $token = ConvertFrom-SecureToken -Token $tokenResult.Token
+        if ([string]::IsNullOrWhiteSpace($token)) { throw "Unable to acquire Azure Storage bearer token." }
+        return $token
     }
+    catch {
+        $resourceUrl = Get-OptionalSetting -Name "STORAGE_TOKEN_RESOURCE_URL" -DefaultValue ""
+        if ([string]::IsNullOrWhiteSpace($resourceUrl)) {
+            throw "Unable to acquire Azure Storage bearer token with -ResourceTypeName '$resourceTypeName'. Check that Az.Accounts supports ResourceTypeName Storage and that AZURE_ENVIRONMENT is AzureUSGovernment. Original error: $($_.Exception.Message)"
+        }
 
-  # module.DiagnosticSetting.data.azurerm_monitor_diagnostic_categories.Diagnostic["workspace-va-avd-ws-prod-1"] will be read during apply
-  # (depends on a resource or a module with changes pending)
- <= data "azurerm_monitor_diagnostic_categories" "Diagnostic" {
-      + id                  = (known after apply)
-      + log_category_groups = (known after apply)
-      + log_category_types  = (known after apply)
-      + metrics             = (known after apply)
-      + resource_id         = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/workspaces/wk-avd-vm100-usgovva-p01-pr01"
+        Write-Host "Storage token ResourceTypeName failed. Retrying with explicit STORAGE_TOKEN_RESOURCE_URL='$resourceUrl'."
+        $tokenResult = Get-AzAccessToken -ResourceUrl $resourceUrl -ErrorAction Stop
+        $token = ConvertFrom-SecureToken -Token $tokenResult.Token
+        if ([string]::IsNullOrWhiteSpace($token)) { throw "Unable to acquire Azure Storage bearer token." }
+        return $token
     }
+}
 
-Error: Instance cannot be destroyed
+function Get-BlobBaseUri {
+    $storageAccount = Get-RequiredSetting -Name "STORAGE_ACCOUNT_NAME"
+    $containerName  = Get-RequiredSetting -Name "STORAGE_CONTAINER_NAME"
+    $suffix         = Get-BlobEndpointSuffix
+    return "https://$storageAccount.$suffix/$containerName"
+}
 
-  on ..\..\modules\ApplicationGroup\main.tf line 4:
-   4: resource "azurerm_virtual_desktop_application_group" "applicationGroup" {
+function Get-EncodedBlobUri {
+    param([Parameter(Mandatory)][string]$BlobName)
+    $encodedName = ($BlobName -split "/" | ForEach-Object { [System.Uri]::EscapeDataString($_) }) -join "/"
+    return "$(Get-BlobBaseUri)/$encodedName"
+}
 
-Resource
-module.ApplicationGroup.azurerm_virtual_desktop_application_group.applicationGroup["va-avd-ag-prod-1"]
-has lifecycle.prevent_destroy set, but the plan calls for this resource to be
-destroyed. To avoid this error and continue with the plan, either disable
-lifecycle.prevent_destroy or reduce the scope of the plan using the -target
-flag.
-
-  # module.DiagnosticSetting.azurerm_monitor_diagnostic_setting.DiagnosticSetting["hostpool-va-avd-hp-prod-1"] must be replaced
--/+ resource "azurerm_monitor_diagnostic_setting" "DiagnosticSetting" {
-      ~ id                             = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01|hstpl-avd-vm100-usgovva-p01-pr01-diag" -> (known after apply)
-      + log_analytics_destination_type = "Dedicated"
-        name                           = "hstpl-avd-vm100-usgovva-p01-pr01-diag"
-      ~ target_resource_id             = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01" # forces replacement -> (known after apply) # forces replacement
-        # (1 unchanged attribute hidden)
-
-      - enabled_log {
-          - category = "AgentHealthStatus" -> null
-
-          - retention_policy {
-              - days    = 0 -> null
-              - enabled = false -> null
-            }
-        }
-      - enabled_log {
-          - category = "Checkpoint" -> null
-
-          - retention_policy {
-              - days    = 0 -> null
-              - enabled = false -> null
-            }
-        }
-      - enabled_log {
-          - category = "Connection" -> null
-
-          - retention_policy {
-              - days    = 0 -> null
-              - enabled = false -> null
-            }
-        }
-      - enabled_log {
-          - category = "Error" -> null
-
-          - retention_policy {
-              - days    = 0 -> null
-              - enabled = false -> null
-            }
-        }
-      - enabled_log {
-          - category = "HostRegistration" -> null
-
-          - retention_policy {
-              - days    = 0 -> null
-              - enabled = false -> null
-            }
-        }
-      - enabled_log {
-          - category = "Management" -> null
-
-          - retention_policy {
-              - days    = 0 -> null
-              - enabled = false -> null
-            }
-        }
-      - enabled_log {
-          - category = "NetworkData" -> null
-
-          - retention_policy {
-              - days    = 0 -> null
-              - enabled = false -> null
-            }
-        }
-      - enabled_log {
-          - category = "SessionHostManagement" -> null
-
-          - retention_policy {
-              - days    = 0 -> null
-              - enabled = false -> null
-            }
+function Get-HttpStatusCode {
+    param([Parameter(Mandatory)]$ErrorRecord)
+    try {
+        if ($ErrorRecord.Exception.Response -and $ErrorRecord.Exception.Response.StatusCode) {
+            return [int]$ErrorRecord.Exception.Response.StatusCode
         }
     }
+    catch { return $null }
+    return $null
+}
 
-  # module.DiagnosticSetting.azurerm_monitor_diagnostic_setting.DiagnosticSetting["hostpool-va-avd-hp-prod-2"] will be created
-  + resource "azurerm_monitor_diagnostic_setting" "DiagnosticSetting" {
-      + id                             = (known after apply)
-      + log_analytics_destination_type = "Dedicated"
-      + log_analytics_workspace_id     = "/subscriptions/***/resourceGroups/rg-avd-logs-usgovva-p01/providers/Microsoft.OperationalInsights/workspaces/law-avd-efe-usgovva-p01"
-      + name                           = "demo-diag"
-      + target_resource_id             = (known after apply)
+function Invoke-BlobRest {
+    param(
+        [Parameter(Mandatory)][string]$Method,
+        [Parameter(Mandatory)][string]$Uri,
+        [hashtable]$ExtraHeaders,
+        [byte[]]$BodyBytes,
+        [string]$ContentType = "text/plain; charset=utf-8"
+    )
+
+    $headers = @{
+        Authorization  = "Bearer $(Get-StorageBearerToken)"
+        "x-ms-date"   = (Get-Date).ToUniversalTime().ToString("R")
+        "x-ms-version" = "2021-12-02"
     }
 
-  # module.Hostpool.azurerm_virtual_desktop_host_pool.hostpool["va-avd-hp-prod-1"] must be replaced
--/+ resource "azurerm_virtual_desktop_host_pool" "hostpool" {
-      ~ custom_rdp_properties            = "audiocapturemode:i:1;audiomode:i:0;videoplaybackmode:i:1;quality:i:1;capture:i:1;enablecredsspsupport:i:1;camerastoredirect:s:*;devicestoredirect:s:;drivestoredirect:s:;redirectclipboard:i:0;redirectcomports:i:0;redirectlocation:i:0;redirectprinters:i:0;redirectsmartcards:i:0;redirectwebauthn:i:0;usbdevicestoredirect:s:;use multimon:i:0;screen mode id:i:1;smart sizing:i:1;autoreconnection enabled:i:1;bandwidthautodetect:i:1;networkautodetect:i:1;compression:i:1;encode redirected video capture:i:1;redirected video capture encoding quality:i:2;enablerdsaadauth:i:1;dynamic resolution:i:1;" -> "quality:i:1;capture:i:1;audiomode:i:0;videoplaybackmode:i:1;audiocapturemode:i:1;enablecredsspsupport:i:1;camerastoredirect:s:*;devicestoredirect:s:;drivestoredirect:s:;redirectclipboard:i:0;redirectcomports:i:0;redirectlocation:i:0;redirectprinters:i:0;redirectsmartcards:i:0;redirectwebauthn:i:0;usbdevicestoredirect:s:;use multimon:i:0;screen mode id:i:1;smart sizing:i:0;dynamic resolution:i:1;autoreconnection enabled:i:1;bandwidthautodetect:i:1;networkautodetect:i:1;compression:i:1;encode redirected video capture:i:1;redirected video capture encoding quality:i:2;enablerdsaadauth:i:1"
-      ~ id                               = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01" -> (known after apply)
-        name                             = "hstpl-avd-vm100-usgovva-p01-pr01"
-      ~ personal_desktop_assignment_type = "Direct" -> "Automatic" # forces replacement
-      - tags                             = {} -> null
-        # (11 unchanged attributes hidden)
+    if ($ExtraHeaders) {
+        foreach ($key in $ExtraHeaders.Keys) { $headers[$key] = $ExtraHeaders[$key] }
     }
 
-  # module.Hostpool.azurerm_virtual_desktop_host_pool.hostpool["va-avd-hp-prod-2"] will be created
-  + resource "azurerm_virtual_desktop_host_pool" "hostpool" {
-      + custom_rdp_properties            = "quality:i:1;capture:i:1;audiocapturemode:i:1;audiomode:i:0;videoplaybackmode:i:1;enablecredsspsupport:i:1;camerastoredirect:s:*;devicestoredirect:s:;drivestoredirect:s:;redirectclipboard:i:0;redirectcomports:i:0;redirectlocation:i:0;redirectprinters:i:0;redirectsmartcards:i:0;redirectwebauthn:i:0;usbdevicestoredirect:s:;use multimon:i:0;screen mode id:i:1;smart sizing:i:1;autoreconnection enabled:i:1;bandwidthautodetect:i:1;networkautodetect:i:1;compression:i:1;encode redirected video capture:i:1;redirected video capture encoding quality:i:2;enablerdsaadauth:i:1;dynamic resolution:i:1"
-      + description                      = "AVD Host Pool for US Gov VA Prod P01 environment"
-      + friendly_name                    = "AVD Host Pool - US Gov VA Prod P01"
-      + id                               = (known after apply)
-      + load_balancer_type               = "Persistent"
-      + location                         = "usgovvirginia"
-      + maximum_sessions_allowed         = 999999
-      + name                             = "demo"
-      + personal_desktop_assignment_type = "Automatic"
-      + preferred_app_group_type         = "Desktop"
-      + public_network_access            = "EnabledForClientsOnly"
-      + resource_group_name              = "rg-avd-vm100-usgovva-p01"
-      + start_vm_on_connect              = true
-      + type                             = "Personal"
-      + validate_environment             = false
+    if ($null -ne $BodyBytes) {
+        return Invoke-WebRequest -Method $Method -Uri $Uri -Headers $headers -Body $BodyBytes -ContentType $ContentType -UseBasicParsing -ErrorAction Stop
     }
 
-  # module.ScalingPlan.azapi_resource.scalingPlan["va-avd-sp-prod-1"] will be updated in-place
-  ~ resource "azapi_resource" "scalingPlan" {
-      ~ body                      = {
-          ~ properties = {
-              ~ hostPoolReferences = [
-                  ~ {
-                      ~ hostPoolArmPath    = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01" -> (known after apply)
-                        # (1 unchanged attribute hidden)
-                    },
-                ]
-                # (5 unchanged attributes hidden)
+    return Invoke-WebRequest -Method $Method -Uri $Uri -Headers $headers -UseBasicParsing -ErrorAction Stop
+}
+
+function Get-BlobText {
+    param([Parameter(Mandatory)][string]$BlobName)
+    $uri = Get-EncodedBlobUri -BlobName $BlobName
+    try {
+        $response = Invoke-BlobRest -Method "GET" -Uri $uri
+        return [string]$response.Content
+    }
+    catch {
+        $statusCode = Get-HttpStatusCode -ErrorRecord $_
+        if ($statusCode -eq 404) { return "" }
+        throw
+    }
+}
+
+function Set-BlobText {
+    param(
+        [Parameter(Mandatory)][string]$BlobName,
+        [Parameter(Mandatory)][string]$Text,
+        [string]$LeaseId
+    )
+
+    $headers = @{ "x-ms-blob-type" = "BlockBlob" }
+    if (-not [string]::IsNullOrWhiteSpace($LeaseId)) { $headers["x-ms-lease-id"] = $LeaseId }
+
+    $bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)
+    Invoke-BlobRest -Method "PUT" -Uri (Get-EncodedBlobUri -BlobName $BlobName) -ExtraHeaders $headers -BodyBytes $bytes -ContentType "text/csv; charset=utf-8" | Out-Null
+}
+
+function Ensure-CsvBlobExists {
+    param(
+        [Parameter(Mandatory)][string]$BlobName,
+        [Parameter(Mandatory)][string[]]$Columns
+    )
+    $existing = Get-BlobText -BlobName $BlobName
+    if ([string]::IsNullOrWhiteSpace($existing)) {
+        $headerOnly = ($Columns -join ",") + "`r`n"
+        Set-BlobText -BlobName $BlobName -Text $headerOnly
+        Write-Stage -Stage "BLOB" -Message "Created missing CSV blob '$BlobName' with the required header."
+        return $true
+    }
+    return $false
+}
+
+function Acquire-BlobLease {
+    param([Parameter(Mandatory)][string]$BlobName)
+    $uri = "$(Get-EncodedBlobUri -BlobName $BlobName)`?comp=lease"
+    $headers = @{
+        "x-ms-lease-action"   = "acquire"
+        "x-ms-lease-duration" = "60"
+    }
+
+    for ($attempt = 1; $attempt -le 6; $attempt++) {
+        try {
+            $response = Invoke-BlobRest -Method "PUT" -Uri $uri -ExtraHeaders $headers
+            return [string]$response.Headers["x-ms-lease-id"]
+        }
+        catch {
+            if ($attempt -eq 6) { throw }
+            Write-Warning "Could not acquire blob lease for '$BlobName'. Retry $attempt of 6."
+            Start-Sleep -Seconds 10
+        }
+    }
+}
+
+function Release-BlobLease {
+    param(
+        [Parameter(Mandatory)][string]$BlobName,
+        [Parameter(Mandatory)][string]$LeaseId
+    )
+    $uri = "$(Get-EncodedBlobUri -BlobName $BlobName)`?comp=lease"
+    $headers = @{
+        "x-ms-lease-action" = "release"
+        "x-ms-lease-id"     = $LeaseId
+    }
+    Invoke-BlobRest -Method "PUT" -Uri $uri -ExtraHeaders $headers | Out-Null
+}
+
+function Assert-CsvHeader {
+    param(
+        [Parameter(Mandatory)][string]$CsvText,
+        [Parameter(Mandatory)][string[]]$Columns,
+        [Parameter(Mandatory)][string]$BlobName
+    )
+    if ([string]::IsNullOrWhiteSpace($CsvText)) { return }
+    $firstLine = ([regex]::Split($CsvText, "`r`n|`n|`r") | Select-Object -First 1)
+    $actualColumns = @($firstLine.Split(",") | ForEach-Object { $_.Trim().Trim('"') })
+    $missing = @($Columns | Where-Object { $actualColumns -notcontains $_ })
+    $extra = @($actualColumns | Where-Object { $Columns -notcontains $_ })
+    if ($missing.Count -gt 0 -or $extra.Count -gt 0) {
+        throw "CSV schema mismatch in '$BlobName'. Missing columns: $($missing -join ', '). Extra columns: $($extra -join ', '). Use the exact provided CSV header."
+    }
+}
+
+function New-EmptyCsvRow {
+    $ordered = [ordered]@{}
+    foreach ($column in $CsvColumns) { $ordered[$column] = "" }
+    return [pscustomobject]$ordered
+}
+
+function Get-RowValue {
+    param(
+        [Parameter(Mandatory)]$Row,
+        [Parameter(Mandatory)][string]$Column
+    )
+    if ($Row.PSObject.Properties[$Column]) { return Get-StringValue -Value $Row.PSObject.Properties[$Column].Value }
+    return ""
+}
+
+function Set-RowValue {
+    param(
+        [Parameter(Mandatory)]$Row,
+        [Parameter(Mandatory)][string]$Column,
+        [AllowNull()][string]$Value
+    )
+    $Row.PSObject.Properties[$Column].Value = (Get-StringValue -Value $Value)
+}
+
+function Normalize-CsvRow {
+    param([Parameter(Mandatory)]$Row)
+    $normalized = New-EmptyCsvRow
+    foreach ($column in $CsvColumns) {
+        if ($Row.PSObject.Properties[$column]) { Set-RowValue -Row $normalized -Column $column -Value $Row.PSObject.Properties[$column].Value }
+    }
+    return $normalized
+}
+
+function Test-EmptyCsvRow {
+    param([Parameter(Mandatory)]$Row)
+    foreach ($column in $CsvColumns) {
+        if (-not [string]::IsNullOrWhiteSpace((Get-RowValue -Row $Row -Column $column))) { return $false }
+    }
+    return $true
+}
+
+function Convert-CsvTextToRows {
+    param([string]$CsvText)
+    if ([string]::IsNullOrWhiteSpace($CsvText)) { return @() }
+    $rawRows = @($CsvText | ConvertFrom-Csv)
+    return @($rawRows | ForEach-Object { Normalize-CsvRow -Row $_ } | Where-Object { -not (Test-EmptyCsvRow -Row $_) })
+}
+
+function Convert-RowsToCsvText {
+    param([object[]]$Rows)
+    $normalizedRows = @($Rows | ForEach-Object { Normalize-CsvRow -Row $_ })
+    if ($normalizedRows.Count -eq 0) { return ($CsvColumns -join ",") + "`r`n" }
+    $csvLines = @($normalizedRows | Select-Object $CsvColumns | ConvertTo-Csv -NoTypeInformation)
+    return ($csvLines -join "`r`n") + "`r`n"
+}
+
+function New-AuditRow {
+    param(
+        [Parameter(Mandatory)][string]$Action,
+        [string]$VmName = "",
+        [string]$VmResourceId = "",
+        [string]$HostPoolName = "",
+        [string]$Result = "Information",
+        [string]$Message = ""
+    )
+    return [pscustomobject][ordered]@{
+        AuditTimeUtc = (Get-Date).ToUniversalTime().ToString("o")
+        FunctionName = "avd-inventory-capture"
+        Action = $Action
+        VmName = $VmName
+        VmResourceId = $VmResourceId
+        HostPoolName = $HostPoolName
+        Result = $Result
+        Message = $Message
+    }
+}
+
+function Convert-AuditRowsToCsvText {
+    param([object[]]$Rows)
+    if ($Rows.Count -eq 0) { return ($AuditColumns -join ",") + "`r`n" }
+    $csvLines = @($Rows | Select-Object $AuditColumns | ConvertTo-Csv -NoTypeInformation)
+    return ($csvLines -join "`r`n") + "`r`n"
+}
+
+function Append-AuditRows {
+    param([object[]]$AuditRows)
+
+    if ($null -eq $AuditRows -or $AuditRows.Count -eq 0) {
+        Write-Stage -Stage "AUDIT" -Message "No audit rows are available to append."
+        return
+    }
+
+    $auditBlob = Get-OptionalSetting -Name "STATUS_CSV_BLOB" -DefaultValue "state/avd-vm-processing-status.csv"
+    Write-Stage -Stage "AUDIT" -Message "Preparing to append $($AuditRows.Count) audit row(s) to '$auditBlob'."
+
+    Ensure-CsvBlobExists -BlobName $auditBlob -Columns $AuditColumns | Out-Null
+    $leaseId = $null
+    try {
+        $leaseId = Acquire-BlobLease -BlobName $auditBlob
+        Write-Stage -Stage "AUDIT" -Message "Acquired lease for audit blob '$auditBlob'."
+
+        $existingText = Get-BlobText -BlobName $auditBlob
+        $existingRows = @()
+        if (-not [string]::IsNullOrWhiteSpace($existingText)) {
+            $existingRows = @($existingText | ConvertFrom-Csv)
+        }
+
+        Write-Stage -Stage "AUDIT" -Message "ExistingAuditRows=$($existingRows.Count); NewAuditRows=$($AuditRows.Count)."
+        $allRows = @($existingRows + $AuditRows)
+        Set-BlobText -BlobName $auditBlob -Text (Convert-AuditRowsToCsvText -Rows $allRows) -LeaseId $leaseId
+        Write-Stage -Stage "AUDIT" -Message "Audit blob '$auditBlob' updated successfully. TotalAuditRows=$($allRows.Count)."
+    }
+    finally {
+        if (-not [string]::IsNullOrWhiteSpace($leaseId)) {
+            Release-BlobLease -BlobName $auditBlob -LeaseId $leaseId
+            Write-Stage -Stage "AUDIT" -Message "Released lease for audit blob '$auditBlob'."
+        }
+    }
+}
+
+function Get-ResourceGroupFromResourceId {
+    param([string]$ResourceId)
+    if ($ResourceId -match "/resourceGroups/([^/]+)/") { return $matches[1] }
+    return ""
+}
+
+function Get-ResourceNameFromResourceId {
+    param([string]$ResourceId)
+    if ([string]::IsNullOrWhiteSpace($ResourceId)) { return "" }
+    return ($ResourceId -split "/")[-1]
+}
+
+function Get-HostPoolResourceGroupFromId {
+    param([string]$HostPoolId)
+    return Get-ResourceGroupFromResourceId -ResourceId $HostPoolId
+}
+
+function Get-HostPoolNameFromObject {
+    param([Parameter(Mandatory)]$HostPool)
+    if (-not [string]::IsNullOrWhiteSpace($HostPool.Name)) { return ($HostPool.Name -split "/")[-1] }
+    return Get-ResourceNameFromResourceId -ResourceId $HostPool.Id
+}
+
+function Get-SessionHostResourceName {
+    param([Parameter(Mandatory)]$SessionHost)
+    return (($SessionHost.Name -split "/")[-1])
+}
+
+function Get-SessionHostVmName {
+    param([Parameter(Mandatory)]$SessionHost)
+    $leaf = Get-SessionHostResourceName -SessionHost $SessionHost
+    return (($leaf -split "\.")[0])
+}
+
+function Get-SessionHostAssignedUser {
+    param([Parameter(Mandatory)]$SessionHost)
+    if ($SessionHost.PSObject.Properties["AssignedUser"]) { return Get-StringValue -Value $SessionHost.AssignedUser }
+    if ($SessionHost.PSObject.Properties["Properties"] -and $SessionHost.Properties.PSObject.Properties["AssignedUser"]) {
+        return Get-StringValue -Value $SessionHost.Properties.AssignedUser
+    }
+    return ""
+}
+
+function Get-SessionHostVmResourceId {
+    param([Parameter(Mandatory)]$SessionHost)
+    foreach ($propertyName in @("ResourceId", "VirtualMachineId")) {
+        if ($SessionHost.PSObject.Properties[$propertyName]) {
+            $candidate = Get-StringValue -Value $SessionHost.$propertyName
+            if ($candidate -match "/providers/Microsoft.Compute/virtualMachines/") { return $candidate }
+        }
+    }
+    if ($SessionHost.PSObject.Properties["Properties"]) {
+        foreach ($propertyName in @("ResourceId", "VirtualMachineId")) {
+            if ($SessionHost.Properties.PSObject.Properties[$propertyName]) {
+                $candidate = Get-StringValue -Value $SessionHost.Properties.$propertyName
+                if ($candidate -match "/providers/Microsoft.Compute/virtualMachines/") { return $candidate }
             }
         }
-        id                        = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/scalingPlans/scplan-avd-vm100-usgovva-p01"
-        name                      = "scplan-avd-vm100-usgovva-p01"
-      ~ output                    = {
-          - id         = "/subscriptions/***/resourcegroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/scalingplans/scplan-avd-vm100-usgovva-p01"
-          - properties = {
-              - hostPoolReferences = [
-                  - {},
-                ]
-              - objectId           = "2e7e3d46-ac0a-41f2-b084-ef9dda69bb31"
+    }
+    return ""
+}
+
+function Test-AllowedHostPool {
+    param(
+        [string]$HostPoolName,
+        [string]$HostPoolResourceGroup
+    )
+    $allowedNames = Get-SettingList -Name "HOST_POOL_NAMES"
+    $allowedRgs = Get-SettingList -Name "HOST_POOL_RESOURCE_GROUPS"
+    if ($allowedNames.Count -gt 0 -and ($allowedNames -notcontains $HostPoolName)) { return $false }
+    if ($allowedRgs.Count -gt 0 -and ($allowedRgs -notcontains $HostPoolResourceGroup)) { return $false }
+    return $true
+}
+
+function Test-AllowedVmNamePrefix {
+    param([string]$VmName)
+    $prefixes = Get-SettingList -Name "AVD_VM_NAME_PREFIXES"
+    if ($prefixes.Count -eq 0) { return $true }
+    foreach ($prefix in $prefixes) {
+        if ($VmName.StartsWith($prefix, [System.StringComparison]::OrdinalIgnoreCase)) { return $true }
+    }
+    return $false
+}
+
+function Get-PrimaryNicInfo {
+    param([Parameter(Mandatory)]$Vm)
+    $nicRefs = @($Vm.NetworkProfile.NetworkInterfaces)
+    if ($nicRefs.Count -eq 0) { return [pscustomobject]@{ Id=""; Name=""; PrivateIpAddress="" } }
+
+    $primaryNicRef = $nicRefs | Where-Object { $_.Primary -eq $true } | Select-Object -First 1
+    if ($null -eq $primaryNicRef) { $primaryNicRef = $nicRefs[0] }
+    $nicId = Get-StringValue -Value $primaryNicRef.Id
+    if ([string]::IsNullOrWhiteSpace($nicId)) { return [pscustomobject]@{ Id=""; Name=""; PrivateIpAddress="" } }
+
+    try {
+        $nicResponse = Invoke-AzRestMethod -Method GET -Path "$nicId`?api-version=2023-09-01" -ErrorAction Stop
+        $nicJson = $nicResponse.Content | ConvertFrom-Json
+        $privateIp = ""
+        foreach ($ipConfig in @($nicJson.properties.ipConfigurations)) {
+            $candidateIp = Get-StringValue -Value $ipConfig.properties.privateIPAddress
+            if ($ipConfig.properties.primary -eq $true -or [string]::IsNullOrWhiteSpace($privateIp)) { $privateIp = $candidateIp }
+        }
+        return [pscustomobject]@{ Id=$nicId; Name=(Get-ResourceNameFromResourceId -ResourceId $nicId); PrivateIpAddress=$privateIp }
+    }
+    catch {
+        Write-Warning "NIC lookup failed for '$nicId'. Error: $($_.Exception.Message)"
+        return [pscustomobject]@{ Id=$nicId; Name=(Get-ResourceNameFromResourceId -ResourceId $nicId); PrivateIpAddress="" }
+    }
+}
+
+function Get-CostCenterFromVmTags {
+    param([Parameter(Mandatory)]$Vm)
+    if ($null -eq $Vm.Tags) { return "" }
+    foreach ($key in $Vm.Tags.Keys) {
+        if ($key -ieq "CostCenter") { return Get-StringValue -Value $Vm.Tags[$key] }
+    }
+    return ""
+}
+
+function Find-VmForSessionHost {
+    param(
+        [Parameter(Mandatory)]$SessionHost,
+        [Parameter(Mandatory)][object[]]$AllVms
+    )
+
+    $vmResourceIdFromSessionHost = Get-SessionHostVmResourceId -SessionHost $SessionHost
+    if (-not [string]::IsNullOrWhiteSpace($vmResourceIdFromSessionHost)) {
+        $vmRg = Get-ResourceGroupFromResourceId -ResourceId $vmResourceIdFromSessionHost
+        $vmName = Get-ResourceNameFromResourceId -ResourceId $vmResourceIdFromSessionHost
+        try { return Get-AzVM -ResourceGroupName $vmRg -Name $vmName -ErrorAction Stop }
+        catch { throw "Backing VM '$vmResourceIdFromSessionHost' was referenced by AVD session host but could not be read. $($_.Exception.Message)" }
+    }
+
+    $sessionVmName = Get-SessionHostVmName -SessionHost $SessionHost
+    $candidates = @($AllVms | Where-Object { $_.Name -ieq $sessionVmName })
+    if ($candidates.Count -eq 1) { return $candidates[0] }
+    if ($candidates.Count -gt 1) { throw "Multiple Azure VMs named '$sessionVmName' were found. The session host did not expose a VM resource ID, so the script cannot safely choose one." }
+    throw "No Azure VM was found for AVD session host '$($SessionHost.Name)'."
+}
+
+function New-DiscoveredInventoryRow {
+    param(
+        [Parameter(Mandatory)]$Vm,
+        [Parameter(Mandatory)]$SessionHost,
+        [Parameter(Mandatory)][string]$HostPoolName,
+        [Parameter(Mandatory)][string]$HostPoolResourceGroup,
+        [Parameter(Mandatory)][string]$NowUtc
+    )
+
+    $nicInfo = Get-PrimaryNicInfo -Vm $Vm
+    $dataDiskNames = @($Vm.StorageProfile.DataDisks | ForEach-Object { Get-StringValue -Value $_.Name } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+
+    $row = New-EmptyCsvRow
+    Set-RowValue -Row $row -Column "VmName" -Value $Vm.Name
+    Set-RowValue -Row $row -Column "VmResourceId" -Value $Vm.Id
+    Set-RowValue -Row $row -Column "ResourceGroup" -Value $Vm.ResourceGroupName
+    Set-RowValue -Row $row -Column "HostPoolName" -Value $HostPoolName
+    Set-RowValue -Row $row -Column "HostPoolResourceGroup" -Value $HostPoolResourceGroup
+    Set-RowValue -Row $row -Column "SessionHostName" -Value $SessionHost.Name
+    Set-RowValue -Row $row -Column "PrivateIpAddress" -Value $nicInfo.PrivateIpAddress
+    Set-RowValue -Row $row -Column "AssignedUser" -Value (Get-SessionHostAssignedUser -SessionHost $SessionHost)
+    Set-RowValue -Row $row -Column "CostCenter" -Value (Get-CostCenterFromVmTags -Vm $Vm)
+    Set-RowValue -Row $row -Column "VmSize" -Value $Vm.HardwareProfile.VmSize
+    Set-RowValue -Row $row -Column "NicName" -Value $nicInfo.Name
+    Set-RowValue -Row $row -Column "OsDiskName" -Value $Vm.StorageProfile.OsDisk.Name
+    Set-RowValue -Row $row -Column "DataDiskNames" -Value ($dataDiskNames -join ";")
+    Set-RowValue -Row $row -Column "Status" -Value "Active"
+    Set-RowValue -Row $row -Column "LastSeenUtc" -Value $NowUtc
+    return $row
+}
+
+function Test-CurrentStateChanged {
+    param(
+        [Parameter(Mandatory)]$ExistingRow,
+        [Parameter(Mandatory)]$DiscoveredRow
+    )
+    foreach ($column in $CurrentStateColumns) {
+        if ((Get-RowValue -Row $ExistingRow -Column $column) -ne (Get-RowValue -Row $DiscoveredRow -Column $column)) { return $true }
+    }
+    return $false
+}
+
+function Merge-DiscoveredWithExistingRow {
+    param(
+        [Parameter(Mandatory)]$ExistingRow,
+        [Parameter(Mandatory)]$DiscoveredRow,
+        [Parameter(Mandatory)][bool]$CurrentStateChanged
+    )
+    $merged = Normalize-CsvRow -Row $DiscoveredRow
+    foreach ($column in $UserRequestColumns) {
+        Set-RowValue -Row $merged -Column $column -Value (Get-RowValue -Row $ExistingRow -Column $column)
+    }
+    if (-not $CurrentStateChanged) {
+        Set-RowValue -Row $merged -Column "LastSeenUtc" -Value (Get-RowValue -Row $ExistingRow -Column "LastSeenUtc")
+    }
+    return $merged
+}
+
+# ------------------------------ Main ------------------------------
+
+$functionName = "avd-inventory-capture"
+$nowUtc = (Get-Date).ToUniversalTime().ToString("o")
+$auditRows = New-Object System.Collections.Generic.List[object]
+
+try {
+    Write-Stage -Stage "START" -Message "$functionName started at $nowUtc."
+
+    $azureEnvironment = Get-OptionalSetting -Name "AZURE_ENVIRONMENT" -DefaultValue "AzureUSGovernment"
+    $subscriptionId = Get-RequiredSetting -Name "AZURE_SUBSCRIPTION_ID"
+    $managedIdentityClientId = Get-OptionalSetting -Name "MANAGED_IDENTITY_CLIENT_ID"
+    $inventoryBlob = Get-RequiredSetting -Name "INPUT_CSV_BLOB"
+
+    Disable-AzContextAutosave -Scope Process | Out-Null
+    Write-Stage -Stage "AUTH" -Message "Connecting to $azureEnvironment using managed identity."
+    if ([string]::IsNullOrWhiteSpace($managedIdentityClientId)) {
+        Connect-AzAccount -Identity -Environment $azureEnvironment -ErrorAction Stop | Out-Null
+    }
+    else {
+        Connect-AzAccount -Identity -AccountId $managedIdentityClientId -Environment $azureEnvironment -ErrorAction Stop | Out-Null
+    }
+    Set-AzContext -SubscriptionId $subscriptionId -ErrorAction Stop | Out-Null
+    Write-Stage -Stage "AUTH" -Message "Managed identity authentication completed and Azure context set to subscription '$subscriptionId'."
+
+    Write-Stage -Stage "CONFIG" -Message "InputCsvBlob=$inventoryBlob; StorageAccount=$(Get-RequiredSetting -Name 'STORAGE_ACCOUNT_NAME'); Container=$(Get-RequiredSetting -Name 'STORAGE_CONTAINER_NAME')."
+    Ensure-CsvBlobExists -BlobName $inventoryBlob -Columns $CsvColumns | Out-Null
+
+    Write-Stage -Stage "DISCOVERY" -Message "Loading AVD host pools and Azure VMs."
+    $allVms = @(Get-AzVM -ErrorAction Stop)
+    Write-Stage -Stage "DISCOVERY" -Message "Loaded $($allVms.Count) VM(s) from subscription '$subscriptionId'."
+
+    $hostPoolResourceGroups = Get-SettingList -Name "HOST_POOL_RESOURCE_GROUPS"
+    if ($hostPoolResourceGroups.Count -gt 0) {
+        Write-Stage -Stage "CONFIG" -Message "Host pool discovery is restricted to resource group(s): $($hostPoolResourceGroups -join ', ')."
+    }
+    else {
+        Write-Stage -Stage "CONFIG" -Message "HOST_POOL_RESOURCE_GROUPS is empty. Host pools will be discovered across the subscription."
+    }
+
+    if ($hostPoolResourceGroups.Count -gt 0) {
+        $hostPools = @()
+        foreach ($rg in $hostPoolResourceGroups) {
+            $hostPools += @(Get-AzWvdHostPool -ResourceGroupName $rg -SubscriptionId $subscriptionId -ErrorAction Stop)
+        }
+    }
+    else {
+        $hostPools = @(Get-AzWvdHostPool -SubscriptionId $subscriptionId -ErrorAction Stop)
+    }
+
+    Write-Stage -Stage "DISCOVERY" -Message "Loaded $($hostPools.Count) host pool(s) before applying host-pool filters."
+
+    $discoveredRows = New-Object System.Collections.Generic.List[object]
+    $seenVmIds = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+
+    foreach ($hostPool in $hostPools) {
+        $hostPoolName = Get-HostPoolNameFromObject -HostPool $hostPool
+        $hostPoolRg = Get-HostPoolResourceGroupFromId -HostPoolId $hostPool.Id
+
+        if (-not (Test-AllowedHostPool -HostPoolName $hostPoolName -HostPoolResourceGroup $hostPoolRg)) {
+            Write-Stage -Stage "FILTER" -Message "Skipping host pool '$hostPoolName' in '$hostPoolRg' because it does not match HOST_POOL_NAMES/HOST_POOL_RESOURCE_GROUPS."
+            continue
+        }
+
+        Write-Stage -Stage "HOSTPOOL" -Message "Reading session hosts from host pool '$hostPoolName' in resource group '$hostPoolRg'."
+        $sessionHosts = @(Get-AzWvdSessionHost -ResourceGroupName $hostPoolRg -HostPoolName $hostPoolName -SubscriptionId $subscriptionId -ErrorAction Stop)
+        Write-Stage -Stage "HOSTPOOL" -Message "Host pool '$hostPoolName' returned $($sessionHosts.Count) session host(s)."
+
+        foreach ($sessionHost in $sessionHosts) {
+            $sessionVmName = Get-SessionHostVmName -SessionHost $sessionHost
+            if (-not (Test-AllowedVmNamePrefix -VmName $sessionVmName)) {
+                Write-Stage -Stage "FILTER" -Message "Skipping VM '$sessionVmName' because it does not match AVD_VM_NAME_PREFIXES."
+                continue
             }
-          - type       = "Microsoft.DesktopVirtualization/scalingplans"
-        } -> (known after apply)
-        tags                      = {}
-        # (7 unchanged attributes hidden)
+
+            try {
+                $vm = Find-VmForSessionHost -SessionHost $sessionHost -AllVms $allVms
+                $row = New-DiscoveredInventoryRow -Vm $vm -SessionHost $sessionHost -HostPoolName $hostPoolName -HostPoolResourceGroup $hostPoolRg -NowUtc $nowUtc
+                [void]$seenVmIds.Add($vm.Id)
+                $discoveredRows.Add($row)
+                Write-Stage -Stage "VM" -Message "Discovered VM '$($vm.Name)' in resource group '$($vm.ResourceGroupName)' for host pool '$hostPoolName'."
+            }
+            catch {
+                $message = $_.Exception.Message
+                Write-Warning $message
+                $auditRows.Add((New-AuditRow -Action "SessionHostVmLookupFailed" -VmName $sessionVmName -HostPoolName $hostPoolName -Result "Warning" -Message $message))
+            }
+        }
     }
 
-  # module.SessionHost.azurerm_virtual_desktop_host_pool_registration_info.rg_token["va-avd-hp-prod-1"] will be created
-  + resource "azurerm_virtual_desktop_host_pool_registration_info" "rg_token" {
-      + expiration_date = (known after apply)
-      + hostpool_id     = (known after apply)
-      + id              = (known after apply)
-      + token           = (sensitive value)
+    Write-Stage -Stage "DISCOVERY" -Message "Discovered $($discoveredRows.Count) live AVD session host VM row(s)."
+
+    $leaseId = $null
+    $csvChanged = $false
+    try {
+        $leaseId = Acquire-BlobLease -BlobName $inventoryBlob
+        Write-Stage -Stage "LEASE" -Message "Acquired CSV lease for '$inventoryBlob'."
+
+        $csvText = Get-BlobText -BlobName $inventoryBlob
+        Assert-CsvHeader -CsvText $csvText -Columns $CsvColumns -BlobName $inventoryBlob
+        $existingRows = @(Convert-CsvTextToRows -CsvText $csvText)
+        Write-Stage -Stage "CSV" -Message "Loaded $($existingRows.Count) existing inventory row(s) from '$inventoryBlob'."
+
+        $existingByVmId = @{}
+        foreach ($row in $existingRows) {
+            $id = Get-RowValue -Row $row -Column "VmResourceId"
+            if (-not [string]::IsNullOrWhiteSpace($id)) { $existingByVmId[$id.ToLowerInvariant()] = $row }
+        }
+
+        $outputRows = New-Object System.Collections.Generic.List[object]
+
+        foreach ($discovered in $discoveredRows) {
+            $vmId = Get-RowValue -Row $discovered -Column "VmResourceId"
+            $key = $vmId.ToLowerInvariant()
+            if ($existingByVmId.ContainsKey($key)) {
+                $existing = $existingByVmId[$key]
+                $currentChanged = Test-CurrentStateChanged -ExistingRow $existing -DiscoveredRow $discovered
+                $merged = Merge-DiscoveredWithExistingRow -ExistingRow $existing -DiscoveredRow $discovered -CurrentStateChanged $currentChanged
+                $outputRows.Add($merged)
+
+                if ($currentChanged) {
+                    $csvChanged = $true
+                    $changedVmName = Get-RowValue -Row $merged -Column "VmName"
+                    Write-Stage -Stage "RECONCILE" -Message "Inventory change detected for VM '$changedVmName'. The CSV row will be updated."
+                    $auditRows.Add((New-AuditRow -Action "InventoryUpdated" -VmName $changedVmName -VmResourceId $vmId -HostPoolName (Get-RowValue -Row $merged -Column "HostPoolName") -Result "Success" -Message "One or more current-state fields changed."))
+                }
+                else {
+                    $unchangedVmName = Get-RowValue -Row $merged -Column "VmName"
+                    Write-Stage -Stage "RECONCILE" -Message "No current-state change detected for VM '$unchangedVmName'."
+                }
+            }
+            else {
+                $csvChanged = $true
+                $outputRows.Add($discovered)
+                $newVmName = Get-RowValue -Row $discovered -Column "VmName"
+                Write-Stage -Stage "RECONCILE" -Message "New VM '$newVmName' will be added to the inventory CSV."
+                $auditRows.Add((New-AuditRow -Action "InventoryAdded" -VmName $newVmName -VmResourceId $vmId -HostPoolName (Get-RowValue -Row $discovered -Column "HostPoolName") -Result "Success" -Message "New AVD session host VM added to CSV."))
+            }
+        }
+
+        foreach ($existing in $existingRows) {
+            $existingVmId = Get-RowValue -Row $existing -Column "VmResourceId"
+            if ([string]::IsNullOrWhiteSpace($existingVmId)) { continue }
+            if (-not $seenVmIds.Contains($existingVmId)) {
+                $csvChanged = $true
+                $removedVmName = Get-RowValue -Row $existing -Column "VmName"
+                Write-Stage -Stage "RECONCILE" -Message "VM '$removedVmName' was not rediscovered and its row will be removed from the inventory CSV."
+                $auditRows.Add((New-AuditRow -Action "InventoryRemoved" -VmName $removedVmName -VmResourceId $existingVmId -HostPoolName (Get-RowValue -Row $existing -Column "HostPoolName") -Result "Success" -Message "Row removed because the VM is no longer a live AVD session host discovered by this automation."))
+            }
+        }
+
+        Write-Stage -Stage "RECONCILE" -Message "Reconciliation completed. OutputRows=$($outputRows.Count); AuditRows=$($auditRows.Count); CsvChanged=$csvChanged."
+
+        if ($csvChanged) {
+            Write-Stage -Stage "WRITE" -Message "Converting $($outputRows.Count) output row(s) to CSV text."
+            Set-BlobText -BlobName $inventoryBlob -Text (Convert-RowsToCsvText -Rows $outputRows.ToArray()) -LeaseId $leaseId
+            Write-Stage -Stage "WRITE" -Message "Inventory CSV '$inventoryBlob' updated because real inventory changes were detected."
+        }
+        else {
+            Write-Stage -Stage "WRITE" -Message "No inventory changes detected. CSV was not written."
+        }
+    }
+    finally {
+        if (-not [string]::IsNullOrWhiteSpace($leaseId)) {
+            Release-BlobLease -BlobName $inventoryBlob -LeaseId $leaseId
+            Write-Stage -Stage "LEASE" -Message "Released CSV lease for '$inventoryBlob'."
+        }
     }
 
-  # module.SessionHostUnregister.azapi_resource_action.remove_session_host_from_hostpool["va-avd-sh-prod-1-1"] must be replaced
--/+ resource "azapi_resource_action" "remove_session_host_from_hostpool" {
-      + exist            = (known after apply)
-      ~ id               = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-1.FED.etnfederal.com" -> (known after apply)
-      + output           = (known after apply)
-      ~ resource_id      = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-1.FED.etnfederal.com" # forces replacement -> (known after apply) # forces replacement
-      + sensitive_output = (sensitive value)
-        # (4 unchanged attributes hidden)
+    Write-Stage -Stage "AUDIT" -Message "Sending $($auditRows.Count) audit row(s) to the status CSV."
+    Append-AuditRows -AuditRows $auditRows.ToArray()
+    Write-Stage -Stage "END" -Message "$functionName completed. CsvChanged=$csvChanged; DiscoveredRows=$($discoveredRows.Count); AuditRows=$($auditRows.Count)."
+}
+catch {
+    $errorMessage = $_.Exception.Message
+    $errorLine = $_.InvocationInfo.ScriptLineNumber
+    $errorPosition = $_.InvocationInfo.PositionMessage
+    $errorStack = $_.ScriptStackTrace
+
+    Write-Host "[ERROR] FunctionName=$functionName"
+    Write-Host "[ERROR] Message=$errorMessage"
+    Write-Host "[ERROR] OriginalLine=$errorLine"
+    Write-Host "[ERROR] Position=$errorPosition"
+    Write-Host "[ERROR] StackTrace=$errorStack"
+
+    Write-Error "$functionName failed. $errorMessage"
+    try {
+        $auditRows.Add((New-AuditRow -Action "FunctionFailed" -Result "Failure" -Message "Line $errorLine. $errorMessage"))
+        Write-Stage -Stage "AUDIT" -Message "Attempting to write failure audit row(s). Count=$($auditRows.Count)."
+        Append-AuditRows -AuditRows $auditRows.ToArray()
     }
-
-  # module.SessionHostUnregister.azapi_resource_action.remove_session_host_from_hostpool["va-avd-sh-prod-1-2"] must be replaced
--/+ resource "azapi_resource_action" "remove_session_host_from_hostpool" {
-      + exist            = (known after apply)
-      ~ id               = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-2.FED.etnfederal.com" -> (known after apply)
-      + output           = (known after apply)
-      ~ resource_id      = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-2.FED.etnfederal.com" # forces replacement -> (known after apply) # forces replacement
-      + sensitive_output = (sensitive value)
-        # (4 unchanged attributes hidden)
+    catch {
+        Write-Warning "Failed to write audit row after error. $($_.Exception.Message)"
     }
-
-  # module.SessionHostUnregister.azapi_resource_action.remove_session_host_from_hostpool["va-avd-sh-prod-1-3"] must be replaced
--/+ resource "azapi_resource_action" "remove_session_host_from_hostpool" {
-      + exist            = (known after apply)
-      ~ id               = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-3.FED.etnfederal.com" -> (known after apply)
-      + output           = (known after apply)
-      ~ resource_id      = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-3.FED.etnfederal.com" # forces replacement -> (known after apply) # forces replacement
-      + sensitive_output = (sensitive value)
-        # (4 unchanged attributes hidden)
-    }
-
-  # module.SessionHostUnregister.azapi_resource_action.remove_session_host_from_hostpool["va-avd-sh-prod-2-11"] must be replaced
--/+ resource "azapi_resource_action" "remove_session_host_from_hostpool" {
-      + exist            = (known after apply)
-      ~ id               = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-11.FED.etnfederal.com" -> (known after apply)
-      + output           = (known after apply)
-      ~ resource_id      = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-11.FED.etnfederal.com" # forces replacement -> (known after apply) # forces replacement
-      + sensitive_output = (sensitive value)
-        # (4 unchanged attributes hidden)
-    }
-
-  # module.SessionHostUnregister.azapi_resource_action.remove_session_host_from_hostpool["va-avd-sh-prod-2-13"] must be replaced
--/+ resource "azapi_resource_action" "remove_session_host_from_hostpool" {
-      + exist            = (known after apply)
-      ~ id               = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-13.FED.etnfederal.com" -> (known after apply)
-      + output           = (known after apply)
-      ~ resource_id      = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-13.FED.etnfederal.com" # forces replacement -> (known after apply) # forces replacement
-      + sensitive_output = (sensitive value)
-        # (4 unchanged attributes hidden)
-    }
-
-  # module.SessionHostUnregister.azapi_resource_action.remove_session_host_from_hostpool["va-avd-sh-prod-2-18"] must be replaced
--/+ resource "azapi_resource_action" "remove_session_host_from_hostpool" {
-      + exist            = (known after apply)
-      ~ id               = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-18.FED.etnfederal.com" -> (known after apply)
-      + output           = (known after apply)
-      ~ resource_id      = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-18.FED.etnfederal.com" # forces replacement -> (known after apply) # forces replacement
-      + sensitive_output = (sensitive value)
-        # (4 unchanged attributes hidden)
-    }
-
-  # module.SessionHostUnregister.azapi_resource_action.remove_session_host_from_hostpool["va-avd-sh-prod-2-4"] must be replaced
--/+ resource "azapi_resource_action" "remove_session_host_from_hostpool" {
-      + exist            = (known after apply)
-      ~ id               = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-4.FED.etnfederal.com" -> (known after apply)
-      + output           = (known after apply)
-      ~ resource_id      = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-4.FED.etnfederal.com" # forces replacement -> (known after apply) # forces replacement
-      + sensitive_output = (sensitive value)
-        # (4 unchanged attributes hidden)
-    }
-
-  # module.SessionHostUnregister.azapi_resource_action.remove_session_host_from_hostpool["va-avd-sh-prod-2-5"] must be replaced
--/+ resource "azapi_resource_action" "remove_session_host_from_hostpool" {
-      + exist            = (known after apply)
-      ~ id               = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-5.FED.etnfederal.com" -> (known after apply)
-      + output           = (known after apply)
-      ~ resource_id      = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01/sessionHosts/EWAPV10001-5.FED.etnfederal.com" # forces replacement -> (known after apply) # forces replacement
-      + sensitive_output = (sensitive value)
-        # (4 unchanged attributes hidden)
-    }
-
-Plan: 13 to add, 1 to change, 10 to destroy.
-
-Changes to Outputs:
-  ~ hostpool_id        = {
-      ~ va-avd-hp-prod-1 = "/subscriptions/***/resourceGroups/rg-avd-vm100-usgovva-p01/providers/Microsoft.DesktopVirtualization/hostPools/hstpl-avd-vm100-usgovva-p01-pr01" -> (known after apply)
-      + va-avd-hp-prod-2 = (known after apply)
-    }
-terraform plan failed
-At C:\actions-runner\_work\_temp\4d6a6103-eaa8-4e2a-b617-3db82f2191fe.ps1:6 char:3
-+   throw "terraform plan failed"
-+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : OperationStopped: (terraform plan failed:String) [], RuntimeException
-    + FullyQualifiedErrorId : terraform plan failed
- 
-Error: Process completed with exit code 1.
-0s
-1s
-0s
-
+    throw
+}
