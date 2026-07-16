@@ -11,8 +11,8 @@ $ProgressPreference = "SilentlyContinue"
 #
 # This script uses the exact CSV schema provided by the user.
 # User/admin columns:
-# - NewAssignedUser: user UPN to assign, or REMOVE/UNASSIGN/CLEAR to unassign.
-# - az_res_costcenter  : CostCenter value to apply as Azure tag.
+# - NewAssignedUser: user UPN to assign, or REMOVE/UNASSIGN/CLEAR/DELETE to unassign.
+# - az_res_costcenter: tag value to assign, or REMOVE/UNASSIGN/CLEAR/DELETE to remove the CostCenter tag.
 # - RequestStatus  : Submit or Submitted to ask the function to process the row.
 #
 # Function-managed result columns:
@@ -233,7 +233,7 @@ function Acquire-BlobLease {
     $uri = "$(Get-EncodedBlobUri -BlobName $BlobName)`?comp=lease"
     $headers = @{
         "x-ms-lease-action"   = "acquire"
-        "x-ms-lease-duration" = "60"
+        "x-ms-lease-duration" = "-1"
     }
     for ($attempt = 1; $attempt -le 6; $attempt++) {
         try {
@@ -253,12 +253,26 @@ function Release-BlobLease {
         [Parameter(Mandatory)][string]$BlobName,
         [Parameter(Mandatory)][string]$LeaseId
     )
+
+    if ([string]::IsNullOrWhiteSpace($LeaseId)) {
+        Write-Warning "[LEASE] No lease ID was supplied for '$BlobName'. Release skipped."
+        return
+    }
+
     $uri = "$(Get-EncodedBlobUri -BlobName $BlobName)`?comp=lease"
     $headers = @{
         "x-ms-lease-action" = "release"
         "x-ms-lease-id"     = $LeaseId
     }
-    Invoke-BlobRest -Method "PUT" -Uri $uri -ExtraHeaders $headers | Out-Null
+
+    try {
+        Invoke-BlobRest -Method "PUT" -Uri $uri -ExtraHeaders $headers | Out-Null
+        Write-Host "[LEASE] Released CSV lease for '$BlobName'."
+    }
+    catch {
+        # Lease cleanup must not hide the real request result.
+        Write-Warning "[LEASE] Unable to release lease for '$BlobName'. $($_.Exception.Message)"
+    }
 }
 
 function Assert-CsvHeader {
@@ -472,8 +486,13 @@ function Get-TagTargetResourceIds {
 }
 
 function Test-RemoveToken {
-    param([string]$Value)
-    return @("REMOVE", "UNASSIGN", "CLEAR", "NONE", "NULL", "__UNASSIGN__", "DELETE") -contains $Value.Trim().ToUpperInvariant()
+    param([AllowNull()][AllowEmptyString()][string]$Value)
+
+    if ([string]::IsNullOrWhiteSpace($Value)) {
+        return $false
+    }
+
+    return @("REMOVE", "UNASSIGN", "CLEAR", "DELETE") -contains $Value.Trim().ToUpperInvariant()
 }
 
 function Update-CostCenterTagTargets {
@@ -485,16 +504,55 @@ function Update-CostCenterTagTargets {
     if ($targetIds.Count -eq 0) { throw "No target resources were found for tag update." }
 
     if (Test-RemoveToken -Value $RequestedCostCenter) {
+        Write-Host "[TAG] Remove token '$RequestedCostCenter' detected. Removing CostCenter tag from $($targetIds.Count) resource(s)."
+
         foreach ($resourceId in $targetIds) {
-            Update-AzTag -ResourceId $resourceId -Tag @{ "CostCenter" = "" } -Operation Delete -ErrorAction Stop | Out-Null
+            $resource = Get-AzResource -ResourceId $resourceId -ErrorAction Stop
+            $remainingTags = @{}
+            $costCenterFound = $false
+
+            if ($null -ne $resource.Tags) {
+                foreach ($tagKey in $resource.Tags.Keys) {
+                    if ($tagKey -ieq "CostCenter") {
+                        $costCenterFound = $true
+                        Write-Host "[TAG] Removing tag '$tagKey' from '$resourceId'."
+                        continue
+                    }
+
+                    $remainingTags[[string]$tagKey] = [string]$resource.Tags[$tagKey]
+                }
+            }
+
+            if (-not $costCenterFound) {
+                Write-Host "[TAG] CostCenter tag is already absent on '$resourceId'."
+                continue
+            }
+
+            # Replace with the remaining tag set. This preserves every other tag
+            # and reliably removes CostCenter even when its current value is unknown.
+            Update-AzTag `
+                -ResourceId $resourceId `
+                -Tag $remainingTags `
+                -Operation Replace `
+                -ErrorAction Stop | Out-Null
+
+            $actualAfterRemoval = Get-ResourceCostCenterTag -ResourceId $resourceId
+            if (-not [string]::IsNullOrWhiteSpace($actualAfterRemoval)) {
+                throw "CostCenter tag removal verification failed for '$resourceId'. Azure returned '$actualAfterRemoval'."
+            }
+
+            Write-Host "[TAG] CostCenter tag removal verified for '$resourceId'."
         }
+
         return "CostCenter tag removed from $($targetIds.Count) resource(s)."
     }
 
+    $normalizedCostCenter = $RequestedCostCenter.Trim()
+    Write-Host "[TAG] Applying CostCenter='$normalizedCostCenter' to $($targetIds.Count) resource(s)."
     foreach ($resourceId in $targetIds) {
-        Update-AzTag -ResourceId $resourceId -Tag @{ "CostCenter" = $RequestedCostCenter } -Operation Merge -ErrorAction Stop | Out-Null
+        Update-AzTag -ResourceId $resourceId -Tag @{ "CostCenter" = $normalizedCostCenter } -Operation Merge -ErrorAction Stop | Out-Null
     }
-    return "CostCenter tag '$RequestedCostCenter' applied to $($targetIds.Count) resource(s)."
+    return "CostCenter tag '$normalizedCostCenter' applied to $($targetIds.Count) resource(s)."
 }
 
 
@@ -511,7 +569,7 @@ function Get-ResourceCostCenterTag {
 function Test-CostCenterTagTargetsMatch {
     param(
         [Parameter(Mandatory)]$Vm,
-        [Parameter(Mandatory)][string]$ExpectedCostCenter
+        [Parameter(Mandatory)][AllowEmptyString()][string]$ExpectedCostCenter
     )
     $targetIds = @(Get-TagTargetResourceIds -Vm $Vm)
     if ($targetIds.Count -eq 0) { return $false }
@@ -528,27 +586,154 @@ function Set-AvdSessionHostAssignedUser {
         [Parameter(Mandatory)]$LiveSessionHost,
         [AllowNull()][object]$TargetAssignedUser
     )
+
     $subscriptionId = Get-RequiredSetting -Name "AZURE_SUBSCRIPTION_ID"
     $hostPoolRg = Get-RowValue -Row $Row -Column "HostPoolResourceGroup"
     $hostPoolName = Get-RowValue -Row $Row -Column "HostPoolName"
     $sessionHostResourceName = Get-SessionHostResourceName -SessionHost $LiveSessionHost
+    $apiVersion = Get-OptionalSetting -Name "AVD_SESSION_HOST_API_VERSION" -DefaultValue "2023-09-05"
 
-    $path = "/subscriptions/$subscriptionId/resourceGroups/$hostPoolRg/providers/Microsoft.DesktopVirtualization/hostPools/$hostPoolName/sessionHosts/$sessionHostResourceName?api-version=2023-09-05"
-    $body = @{ properties = @{ assignedUser = $TargetAssignedUser } } | ConvertTo-Json -Depth 10
-
-    Invoke-AzRestMethod -Method PATCH -Path $path -Payload $body -ErrorAction Stop | Out-Null
-    Start-Sleep -Seconds 3
-
-    $verified = Find-LiveSessionHostForRow -Row $Row
-    $verifiedAssignedUser = Get-SessionHostAssignedUser -SessionHost $verified
-
-    if ([string]::IsNullOrWhiteSpace($TargetAssignedUser)) {
-        if (-not [string]::IsNullOrWhiteSpace($verifiedAssignedUser)) { throw "Assignment verification failed. Expected no assigned user, but Azure returned '$verifiedAssignedUser'." }
-        return ""
+    if ([string]::IsNullOrWhiteSpace($hostPoolRg)) {
+        throw "HostPoolResourceGroup is empty in the CSV row."
+    }
+    if ([string]::IsNullOrWhiteSpace($hostPoolName)) {
+        throw "HostPoolName is empty in the CSV row."
+    }
+    if ([string]::IsNullOrWhiteSpace($sessionHostResourceName)) {
+        throw "Unable to determine the AVD session host resource name."
     }
 
-    if ($verifiedAssignedUser -ine $TargetAssignedUser) { throw "Assignment verification failed. Expected '$TargetAssignedUser', but Azure returned '$verifiedAssignedUser'." }
-    return $verifiedAssignedUser
+    $resourceId = "/subscriptions/${subscriptionId}/resourceGroups/${hostPoolRg}/providers/Microsoft.DesktopVirtualization/hostPools/${hostPoolName}/sessionHosts/${sessionHostResourceName}"
+    $requestPath = "${resourceId}?api-version=${apiVersion}&force=true"
+    $targetDisplay = if ($null -eq $TargetAssignedUser) { "<empty>" } else { [string]$TargetAssignedUser }
+
+    Write-Host "[ASSIGNMENT] Starting AVD session-host assignment operation."
+    Write-Host "[ASSIGNMENT] SubscriptionId='$subscriptionId'"
+    Write-Host "[ASSIGNMENT] HostPoolResourceGroup='$hostPoolRg'"
+    Write-Host "[ASSIGNMENT] HostPoolName='$hostPoolName'"
+    Write-Host "[ASSIGNMENT] SessionHostResourceName='$sessionHostResourceName'"
+    Write-Host "[ASSIGNMENT] TargetAssignedUser='$targetDisplay'"
+    Write-Host "[ASSIGNMENT] ApiVersion='$apiVersion'"
+
+    Write-Host "[ASSIGNMENT] Validating host-pool configuration."
+    $hostPool = Get-AzWvdHostPool `
+        -ResourceGroupName $hostPoolRg `
+        -Name $hostPoolName `
+        -SubscriptionId $subscriptionId `
+        -ErrorAction Stop
+
+    Write-Host "[ASSIGNMENT] HostPoolType='$($hostPool.HostPoolType)'"
+    Write-Host "[ASSIGNMENT] PersonalDesktopAssignmentType='$($hostPool.PersonalDesktopAssignmentType)'"
+
+    if ($hostPool.HostPoolType -ine "Personal") {
+        throw "User assignment is supported only for a Personal host pool. Host pool '$hostPoolName' has type '$($hostPool.HostPoolType)'."
+    }
+
+    if ($hostPool.PersonalDesktopAssignmentType -ine "Direct") {
+        Write-Warning "[ASSIGNMENT] Host pool '$hostPoolName' uses assignment type '$($hostPool.PersonalDesktopAssignmentType)', not 'Direct'. Explicit user assignment may not behave as expected."
+    }
+
+    $assignedUserPayload = if ([string]::IsNullOrWhiteSpace([string]$TargetAssignedUser)) {
+        # Azure Virtual Desktop requires an empty string plus force=true to unassign.
+        ""
+    }
+    else {
+        ([string]$TargetAssignedUser).Trim()
+    }
+
+    $bodyObject = @{
+        properties = @{
+            assignedUser = $assignedUserPayload
+        }
+    }
+    $body = $bodyObject | ConvertTo-Json -Depth 10 -Compress
+
+    Write-Host "[ASSIGNMENT] Sending PATCH request."
+    Write-Host "[ASSIGNMENT] ResourceId='$resourceId'"
+    Write-Host "[ASSIGNMENT] ApiVersion='$apiVersion'"
+    Write-Host "[ASSIGNMENT] RequestPath='$requestPath'"
+    Write-Host "[ASSIGNMENT] RequestPayload=$body"
+
+    $patchParameters = @{
+        Path        = $requestPath
+        Method      = "PATCH"
+        Payload     = $body
+        ErrorAction = "Stop"
+    }
+
+    $patchResponse = Invoke-AzRestMethod @patchParameters
+
+    Write-Host "[ASSIGNMENT] PATCH completed. StatusCode='$($patchResponse.StatusCode)'"
+    if (-not [string]::IsNullOrWhiteSpace([string]$patchResponse.Content)) {
+        Write-Host "[ASSIGNMENT] PATCH response content: $($patchResponse.Content)"
+    }
+
+    if ($patchResponse.StatusCode -notin @(200, 201, 202)) {
+        throw "Assignment PATCH returned unexpected status code '$($patchResponse.StatusCode)'. Response: $($patchResponse.Content)"
+    }
+
+    $maximumAttempts = 10
+    $delaySeconds = 5
+    $verifiedAssignedUser = ""
+
+    for ($attempt = 1; $attempt -le $maximumAttempts; $attempt++) {
+        Write-Host "[ASSIGNMENT] Verification attempt $attempt of $maximumAttempts. Waiting $delaySeconds second(s)."
+        Start-Sleep -Seconds $delaySeconds
+
+        try {
+            $getParameters = @{
+                Path        = $requestPath
+                Method      = "GET"
+                ErrorAction = "Stop"
+            }
+
+            $getResponse = Invoke-AzRestMethod @getParameters
+
+            Write-Host "[ASSIGNMENT] Verification GET status code='$($getResponse.StatusCode)'"
+
+            if ($getResponse.StatusCode -ne 200) {
+                Write-Warning "[ASSIGNMENT] Verification GET returned status code '$($getResponse.StatusCode)'."
+                continue
+            }
+
+            if ([string]::IsNullOrWhiteSpace([string]$getResponse.Content)) {
+                Write-Warning "[ASSIGNMENT] Verification GET returned empty content."
+                continue
+            }
+
+            $responseObject = $getResponse.Content | ConvertFrom-Json
+            if ($null -ne $responseObject.properties -and $responseObject.properties.PSObject.Properties["assignedUser"]) {
+                $verifiedAssignedUser = Get-StringValue -Value $responseObject.properties.assignedUser
+            }
+            else {
+                $verifiedAssignedUser = ""
+            }
+
+            Write-Host "[ASSIGNMENT] Azure currently returns assignedUser='$verifiedAssignedUser'."
+
+            if ([string]::IsNullOrWhiteSpace([string]$TargetAssignedUser)) {
+                if ([string]::IsNullOrWhiteSpace($verifiedAssignedUser)) {
+                    Write-Host "[ASSIGNMENT] User unassignment verified successfully."
+                    return ""
+                }
+            }
+            elseif ($verifiedAssignedUser -ieq ([string]$TargetAssignedUser).Trim()) {
+                Write-Host "[ASSIGNMENT] User assignment verified successfully."
+                return $verifiedAssignedUser
+            }
+
+            Write-Warning "[ASSIGNMENT] Assignment has not propagated yet. Expected='$targetDisplay', Actual='$verifiedAssignedUser'."
+        }
+        catch {
+            Write-Warning "[ASSIGNMENT] Verification attempt $attempt failed. $($_.Exception.Message)"
+        }
+    }
+
+    if ([string]::IsNullOrWhiteSpace([string]$TargetAssignedUser)) {
+        throw "Assignment verification failed after $maximumAttempts attempts. Expected no assigned user, but Azure returned '$verifiedAssignedUser'."
+    }
+
+    throw "Assignment verification failed after $maximumAttempts attempts. Expected '$TargetAssignedUser', but Azure returned '$verifiedAssignedUser'."
 }
 
 function Set-RequestResult {
@@ -626,16 +811,20 @@ try {
 
                     $vm = Get-AzVM -ResourceGroupName (Get-RowValue -Row $row -Column "ResourceGroup") -Name $vmName -ErrorAction Stop
 
-                    $requestedUser = Get-RowValue -Row $row -Column "NewAssignedUser"
-                    $requestedCostCenter = Get-RowValue -Row $row -Column "az_res_costcenter"
+                    $requestedUser = (Get-RowValue -Row $row -Column "NewAssignedUser").Trim()
+                    $requestedCostCenter = (Get-RowValue -Row $row -Column "az_res_costcenter").Trim()
+
+                    Write-Host "[REQUEST] NewAssignedUser='$requestedUser'"
+                    Write-Host "[REQUEST] az_res_costcenter='$requestedCostCenter'"
                     $actions = New-Object System.Collections.Generic.List[string]
                     $azureChangesApplied = $false
 
                     if (-not [string]::IsNullOrWhiteSpace($requestedCostCenter)) {
                         $currentCostCenter = Get-RowValue -Row $row -Column "CostCenter"
-                        $targetCostCenterForCompare = $requestedCostCenter
-                        if (Test-RemoveToken -Value $requestedCostCenter) { $targetCostCenterForCompare = "" }
+                        $isCostCenterRemoval = Test-RemoveToken -Value $requestedCostCenter
+                        $targetCostCenterForCompare = if ($isCostCenterRemoval) { "" } else { $requestedCostCenter }
 
+                        Write-Host "[TAG] RemovalRequested='$isCostCenterRemoval' ExpectedCostCenter='$targetCostCenterForCompare'"
                         $allTagTargetsAlreadyMatch = Test-CostCenterTagTargetsMatch -Vm $vm -ExpectedCostCenter $targetCostCenterForCompare
                         if ($currentCostCenter -eq $targetCostCenterForCompare -and $allTagTargetsAlreadyMatch) {
                             $actions.Add("CostCenter already matches '$targetCostCenterForCompare' on all configured tag targets.")
@@ -649,8 +838,10 @@ try {
                     }
 
                     if (-not [string]::IsNullOrWhiteSpace($requestedUser)) {
-                        $targetAssignedUser = $requestedUser
-                        if (Test-RemoveToken -Value $requestedUser) { $targetAssignedUser = $null }
+                        $isUserRemoval = Test-RemoveToken -Value $requestedUser
+                        $targetAssignedUser = if ($isUserRemoval) { $null } else { $requestedUser }
+
+                        Write-Host "[ASSIGNMENT] RemovalRequested='$isUserRemoval' RequestedValue='$requestedUser'"
 
                         $currentAssignedUser = Get-RowValue -Row $row -Column "AssignedUser"
                         if ([string]::IsNullOrWhiteSpace($targetAssignedUser)) {
@@ -690,6 +881,10 @@ try {
                         Set-RequestResult -Row $row -Status "Skipped" -Message "No changes needed. Requested values already match current CSV/live state."
                         $auditRows.Add((New-AuditRow -Action "RequestSkipped" -VmName $vmName -VmResourceId $vmId -HostPoolName $hostPoolName -Result "Skipped" -Message "No changes needed."))
                     }
+
+                    # Clear processed request inputs so the same request is not submitted again accidentally.
+                    Set-RowValue -Row $row -Column "NewAssignedUser" -Value ""
+                    Set-RowValue -Row $row -Column "az_res_costcenter" -Value ""
 
                     $csvChanged = $true
                 }
