@@ -1,0 +1,136 @@
+name: Terraform CD (Arizona)
+ 
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "infra/envs/env-arizona/**"
+      - ".github/workflows/deploy-arizona.yml"
+
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: write
+ 
+concurrency:
+  group: tf-cd-arizona-${{ github.ref }}
+  cancel-in-progress: false
+ 
+env:
+  TF_VERSION: "1.6.6"
+  TF_IN_AUTOMATION: "true"
+  ARM_USE_OIDC: "true"
+  ARM_ENVIRONMENT: "usgovernment"
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  # FUNCTION_PROJECT_PATH: vm-entra-deletion
+  # FUNCTION_PACKAGE_PATH: artifacts/vm-entra-deletion.zip
+  # FUNCTION_APP_NAME: "func-avd-automation-usgovaz-p01"
+  # FUNCTION_APP_RESOURCE_GROUP: "rg-avd-automation-usgovaz-p01"
+ 
+jobs:
+  deploy:
+    runs-on: efe-govaz-p01
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
+ 
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.ARM_CLIENT_ID }}
+          tenant-id: ${{ secrets.ARM_TENANT_ID }}
+          subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          environment: AzureUSGovernment
+          audience: api://AzureADTokenExchangeUSGov
+
+      - name: Prepare GitHub OIDC token
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const audience = 'api://AzureADTokenExchangeUSGov';
+            const token = await core.getIDToken(audience);
+            core.setSecret(token);
+            const tokenPath = path.join(process.env.RUNNER_TEMP, 'azure-oidc-token.jwt');
+            fs.writeFileSync(tokenPath, token, { encoding: 'utf8', mode: 0o600 });
+            core.exportVariable('ARM_OIDC_TOKEN', token);
+            core.exportVariable('ARM_OIDC_TOKEN_FILE_PATH', tokenPath);
+            const b64 = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+            const payload = JSON.parse(Buffer.from(b64, 'base64').toString('utf8'));
+            core.info(`OIDC claims: iss=${payload.iss} aud=${payload.aud} sub=${payload.sub}`);
+            
+      - name: Terraform Init
+        working-directory: infra/envs/env-arizona
+        shell: powershell
+        run: |
+          terraform init -input=false -reconfigure `
+            -backend-config="resource_group_name=${{ secrets.STORAGE_RESOURCE_GROUP_DR }}" `
+            -backend-config="storage_account_name=${{ secrets.STORAGE_ACCOUNT_NAME_DR }}" `
+            -backend-config="container_name=${{ secrets.CONTAINER_NAME }}" `
+            -backend-config="key=${{ secrets.BACKEND_KEY }}" `
+            -backend-config="environment=usgovernment"
+  
+      - name: Terraform Plan
+        working-directory: infra/envs/env-arizona
+        shell: powershell
+        run: |
+          $ErrorActionPreference = "Stop"
+          terraform plan -input=false -no-color -out=tfplan -var-file="terraform.tfvars" -detailed-exitcode
+          $planExit = $LASTEXITCODE
+          if ($planExit -eq 1) {
+            throw "terraform plan failed"
+          }
+          terraform show -no-color tfplan | Out-File -FilePath plan.txt -Encoding utf8
+ 
+      - name: Terraform Apply
+        shell: powershell
+        if: >
+          (github.event_name == 'push')
+        working-directory: infra/envs/env-arizona
+        run: terraform apply -input=false -auto-approve tfplan
+
+      # - name: Deploy Function App when code changed
+      #   if: >
+      #     (github.event_name == 'push') ||
+      #     (github.event_name == 'workflow_dispatch' && inputs.action == 'apply')
+      #   shell: powershell
+      #   run: |
+      #     Write-Host "Checking changes in Function App folder: $env:FUNCTION_PROJECT_PATH"
+      
+      #     $changedFiles = git diff --name-only HEAD~1 HEAD 2>$null
+
+      #     if ($LASTEXITCODE -ne 0) {
+      #       Write-Host "Previous commit not available. Checking current commit files."
+      #       $changedFiles = git show --name-only --pretty="" HEAD
+      #     }
+      #     $functionChanged = $changedFiles | Where-Object { $_ -like "$env:FUNCTION_PROJECT_PATH/*" }
+      
+      #     if ($functionChanged) {
+      #       Write-Host "Function code changed. Deploying Function App..."
+      
+      #       New-Item -ItemType Directory -Force -Path "artifacts" | Out-Null
+      
+      #       python scripts/package-functionapp-code.py `
+      #         --source "${{ env.FUNCTION_PROJECT_PATH }}" `
+      #         --output "${{ env.FUNCTION_PACKAGE_PATH }}"
+            
+      #       bash scripts/deploy-functionapp-code.sh `
+      #         "${{ env.FUNCTION_APP_RESOURCE_GROUP }}" `
+      #         "${{ env.FUNCTION_APP_NAME }}" `
+      #         "${{ env.FUNCTION_PACKAGE_PATH }}"
+      
+      #       Write-Host "Showing Function package contents..."
+      #       unzip -l "${{ env.FUNCTION_PACKAGE_PATH }}"
+      #     }
+      #     else {
+      #       Write-Host "No changes found in $env:FUNCTION_PROJECT_PATH. Skipping Function App deployment."
+      #     }

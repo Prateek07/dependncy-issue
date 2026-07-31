@@ -1,0 +1,92 @@
+name: Deploy Function App
+ 
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+    paths:
+      # - "vm-entra-deletion/**"
+      - "function-code/**"
+      - ".github/workflows/deploy-function.yml"
+ 
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: read
+ 
+env:
+  ARM_USE_OIDC: "true"
+  ARM_ENVIRONMENT: "usgovernment"
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  # FUNCTION_PROJECT_PATH: "vm-entra-deletion"
+  # FUNCTION_PACKAGE_PATH: "artifacts/vm-entra-deletion.zip"
+  FUNCTION_PROJECT_PATH: "function-code"
+  FUNCTION_PACKAGE_PATH: "artifacts/function-code.zip"
+ 
+jobs:
+  deploy-function:
+    if: github.event.pull_request.merged == true
+ 
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: fa-arizona
+            runner: efe-govaz-p01
+            function_app_name: func-avd-automation-usgovaz-p01
+            resource_group: rg-avd-automation-usgovaz-p01
+ 
+          - label: fa-virginia
+            runner: efe-govva-p01
+            function_app_name: func-avd-automation-usgovva-p01
+            resource_group: rg-avd-automation-usgovva-p01
+ 
+    runs-on: ${{ matrix.runner }}
+ 
+    steps:
+      - name: Check selected label
+        if: ${{ !contains(github.event.pull_request.labels.*.name, matrix.label) }}
+        shell: powershell
+        run: |
+          echo "Label ${{ matrix.label }} not found. Skipping."
+          exit 0
+ 
+      - name: Checkout
+        if: contains(github.event.pull_request.labels.*.name, matrix.label)
+        uses: actions/checkout@v5
+ 
+      - name: Azure Login
+        if: contains(github.event.pull_request.labels.*.name, matrix.label)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.ARM_CLIENT_ID }}
+          tenant-id: ${{ secrets.ARM_TENANT_ID }}
+          subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          environment: AzureUSGovernment
+          audience: api://AzureADTokenExchangeUSGov
+ 
+      - name: Package Function App code
+        if: contains(github.event.pull_request.labels.*.name, matrix.label)
+        shell: powershell
+        run: |
+          New-Item -ItemType Directory -Force -Path "artifacts" | Out-Null
+ 
+          if (Test-Path "${{ env.FUNCTION_PACKAGE_PATH }}") {
+            Remove-Item "${{ env.FUNCTION_PACKAGE_PATH }}" -Force
+          }
+ 
+          Compress-Archive `
+            -Path "${{ env.FUNCTION_PROJECT_PATH }}\*" `
+            -DestinationPath "${{ env.FUNCTION_PACKAGE_PATH }}" `
+            -Force
+ 
+      - name: Deploy Function App code
+        if: contains(github.event.pull_request.labels.*.name, matrix.label)
+        shell: powershell
+        run: |
+          az functionapp deployment source config-zip `
+            --resource-group "${{ matrix.resource_group }}" `
+            --name "${{ matrix.function_app_name }}" `
+            --src "${{ env.FUNCTION_PACKAGE_PATH }}"

@@ -1,0 +1,22 @@
+name: PR Required Check
+ 
+permissions:
+  contents: read
+
+on:
+  pull_request:
+
+    branches: [ "main" ]
+    paths:
+      # - "vm-entra-deletion/**"
+      - "function-code/**"
+      - ".github/workflows/deploy-function.yml"
+jobs:
+  plan:
+    runs-on: efe-govaz-p01
+    steps:
+      - name: Required plan check
+        run: |
+          echo "Required plan check passed."
+          echo "Function deployment will run after merge to main."
+ 
